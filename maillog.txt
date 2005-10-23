@@ -1,0 +1,283 @@
+161(new): ------------------------------ new run at Tue Aug 17 19:48:41 2004
+165(new):    From: William McKee <william@knowmad.com>
+166(new):      To: petal@lists.webarch.co.uk
+167(new): Subject: [Petal] Modifiers and variables
+174(new): message is MIME.  MIME-Version is 1.0
+161(new): ------------------------------ new run at Tue Aug 17 19:51:24 2004
+165(new):    From: William McKee <william@knowmad.com>
+166(new):      To: petal@lists.webarch.co.uk
+167(new): Subject: [Petal] Modifiers and variables
+174(new): message is MIME.  MIME-Version is 1.0
+161(new): ------------------------------ new run at Tue Aug 17 19:55:17 2004
+165(new):    From: William McKee <william@knowmad.com>
+166(new):      To: petal@lists.webarch.co.uk
+167(new): Subject: [Petal] Modifiers and variables
+174(new): message is MIME.  MIME-Version is 1.0
+161(new): ------------------------------ new run at Tue Aug 17 20:23:27 2004
+165(new):    From: William McKee <william@knowmad.com>
+166(new):      To: petal@lists.webarch.co.uk
+167(new): Subject: [Petal] Modifiers and variables
+174(new): message is MIME.  MIME-Version is 1.0
+287(accept): accepting to /home/corion/mail/archive/mail.20040817
+319(accept): /home/corion/mail/archive/mail.20040817 is of type mbox
+326(accept): calling accept handler accept_to_mbox(/home/corion/mail/archive/mail.20040817)
+417(write_message): writing to /home/corion/mail/archive/mail.20040817; options extra_newline 1 need_from 1 need_lock 1
+858(audit_get_lock):   attempting to lock  file /home/corion/mail/archive/mail.20040817
+860(audit_get_lock):   successfully locked file /home/corion/mail/archive/mail.20040817
+432(write_message): No mbox From line, making one up.
+452(write_message): printing self as mbox string.
+459(write_message): returning success.
+331(accept): delivered successfully to 1 destinations at Tue Aug 17 20:23:27 2004
+287(accept): accepting to /home/corion/mail/
+319(accept): /home/corion/mail/ is of type maildir
+326(accept): calling accept handler accept_to_maildir(/home/corion/mail/)
+481(accept_to_maildir): will write to /home/corion/mail/
+510(accept_to_maildir): writing to /home/corion/mail/tmp/1092767010.382_0.aliens
+417(write_message): writing to /home/corion/mail/tmp/1092767010.382_0.aliens; options extra_newline 0 need_from 0 need_lock 0
+452(write_message): printing self as mbox string.
+459(write_message): returning success.
+541(accept_to_maildir): maildir: hardlinking to /home/corion/mail/new/1092767010.382_1.aliens
+331(accept): delivered successfully to 1 destinations at Tue Aug 17 20:23:30 2004
+335(accept): Exiting with status DELIVERED = 0
+161(new): ------------------------------ new run at Tue Aug 17 20:26:29 2004
+165(new):    From: William McKee <william@knowmad.com>
+166(new):      To: petal@lists.webarch.co.uk
+167(new): Subject: [Petal] Modifiers and variables
+174(new): message is MIME.  MIME-Version is 1.0
+287(accept): accepting to /home/corion/mail/archive/mail.20040817
+319(accept): /home/corion/mail/archive/mail.20040817 is of type mbox
+326(accept): calling accept handler accept_to_mbox(/home/corion/mail/archive/mail.20040817)
+417(write_message): writing to /home/corion/mail/archive/mail.20040817; options extra_newline 1 need_from 1 need_lock 1
+858(audit_get_lock):   attempting to lock  file /home/corion/mail/archive/mail.20040817
+860(audit_get_lock):   successfully locked file /home/corion/mail/archive/mail.20040817
+432(write_message): No mbox From line, making one up.
+452(write_message): printing self as mbox string.
+459(write_message): returning success.
+331(accept): delivered successfully to 1 destinations at Tue Aug 17 20:26:29 2004
+335(): 4
+287(accept): accepting to /home/corion/mail/
+319(accept): /home/corion/mail/ is of type maildir
+326(accept): calling accept handler accept_to_maildir(/home/corion/mail/)
+481(accept_to_maildir): will write to /home/corion/mail/
+510(accept_to_maildir): writing to /home/corion/mail/tmp/1092767192.411_0.aliens
+417(write_message): writing to /home/corion/mail/tmp/1092767192.411_0.aliens; options extra_newline 0 need_from 0 need_lock 0
+452(write_message): printing self as mbox string.
+459(write_message): returning success.
+541(accept_to_maildir): maildir: hardlinking to /home/corion/mail/new/1092767192.411_1.aliens
+331(accept): delivered successfully to 1 destinations at Tue Aug 17 20:26:32 2004
+335(accept): Exiting with status DELIVERED = 0
+161(new): ------------------------------ new run at Tue Aug 17 20:28:06 2004
+165(new):    From: William McKee <william@knowmad.com>
+166(new):      To: petal@lists.webarch.co.uk
+167(new): Subject: [Petal] Modifiers and variables
+174(new): message is MIME.  MIME-Version is 1.0
+287(accept): accepting to /home/corion/mail/archive/mail.20040817
+319(accept): /home/corion/mail/archive/mail.20040817 is of type mbox
+326(accept): calling accept handler accept_to_mbox(/home/corion/mail/archive/mail.20040817)
+417(write_message): writing to /home/corion/mail/archive/mail.20040817; options extra_newline 1 need_from 1 need_lock 1
+858(audit_get_lock):   attempting to lock  file /home/corion/mail/archive/mail.20040817
+860(audit_get_lock):   successfully locked file /home/corion/mail/archive/mail.20040817
+432(write_message): No mbox From line, making one up.
+452(write_message): printing self as mbox string.
+459(write_message): returning success.
+331(accept): delivered successfully to 1 destinations at Tue Aug 17 20:28:06 2004
+287(accept): accepting to /home/corion/mail/
+319(accept): /home/corion/mail/ is of type maildir
+326(accept): calling accept handler accept_to_maildir(/home/corion/mail/)
+481(accept_to_maildir): will write to /home/corion/mail/
+510(accept_to_maildir): writing to /home/corion/mail/tmp/1092767289.424_0.aliens
+417(write_message): writing to /home/corion/mail/tmp/1092767289.424_0.aliens; options extra_newline 0 need_from 0 need_lock 0
+452(write_message): printing self as mbox string.
+459(write_message): returning success.
+541(accept_to_maildir): maildir: hardlinking to /home/corion/mail/new/1092767289.424_1.aliens
+331(accept): delivered successfully to 1 destinations at Tue Aug 17 20:28:09 2004
+335(accept): Exiting with status DELIVERED = 0
+161(new): ------------------------------ new run at Tue Aug 17 20:29:35 2004
+165(new):    From: "Stefany Iliana" <yhwk7fbfl@bellsouth.net>
+166(new):      To: michael.traven@corion.net
+167(new): Subject: Instaant Download After Pay, Super Cheaap Softwares measure 
+174(new): message is MIME.  MIME-Version is 1.0
+287(accept): accepting to /home/corion/mail/archive/mail.20040817
+319(accept): /home/corion/mail/archive/mail.20040817 is of type mbox
+326(accept): calling accept handler accept_to_mbox(/home/corion/mail/archive/mail.20040817)
+417(write_message): writing to /home/corion/mail/archive/mail.20040817; options extra_newline 1 need_from 1 need_lock 1
+858(audit_get_lock):   attempting to lock  file /home/corion/mail/archive/mail.20040817
+860(audit_get_lock):   successfully locked file /home/corion/mail/archive/mail.20040817
+432(write_message): No mbox From line, making one up.
+452(write_message): printing self as mbox string.
+459(write_message): returning success.
+331(accept): delivered successfully to 1 destinations at Tue Aug 17 20:29:35 2004
+654(ignore): Ignoring
+161(new): ------------------------------ new run at Tue Aug 17 20:29:45 2004
+165(new):    From: "Teddy Hardin" <botpgwfv@onemain.com>
+166(new):      To: <michael.traven@corion.net>
+167(new): Subject: company's Viqcdin without prescription , Viqcdin On Line , Fast Shipping
+174(new): message is MIME.  MIME-Version is 1.0
+287(accept): accepting to /home/corion/mail/archive/mail.20040817
+319(accept): /home/corion/mail/archive/mail.20040817 is of type mbox
+326(accept): calling accept handler accept_to_mbox(/home/corion/mail/archive/mail.20040817)
+417(write_message): writing to /home/corion/mail/archive/mail.20040817; options extra_newline 1 need_from 1 need_lock 1
+858(audit_get_lock):   attempting to lock  file /home/corion/mail/archive/mail.20040817
+860(audit_get_lock):   successfully locked file /home/corion/mail/archive/mail.20040817
+432(write_message): No mbox From line, making one up.
+452(write_message): printing self as mbox string.
+459(write_message): returning success.
+331(accept): delivered successfully to 1 destinations at Tue Aug 17 20:29:45 2004
+654(ignore): Ignoring
+161(new): ------------------------------ new run at Tue Aug 17 20:30:48 2004
+165(new):    From: William McKee <william@knowmad.com>
+166(new):      To: petal@lists.webarch.co.uk
+167(new): Subject: [Petal] Modifiers and variables
+174(new): message is MIME.  MIME-Version is 1.0
+287(accept): accepting to /home/corion/mail/archive/mail.20040817
+319(accept): /home/corion/mail/archive/mail.20040817 is of type mbox
+326(accept): calling accept handler accept_to_mbox(/home/corion/mail/archive/mail.20040817)
+417(write_message): writing to /home/corion/mail/archive/mail.20040817; options extra_newline 1 need_from 1 need_lock 1
+858(audit_get_lock):   attempting to lock  file /home/corion/mail/archive/mail.20040817
+860(audit_get_lock):   successfully locked file /home/corion/mail/archive/mail.20040817
+432(write_message): No mbox From line, making one up.
+452(write_message): printing self as mbox string.
+459(write_message): returning success.
+331(accept): delivered successfully to 1 destinations at Tue Aug 17 20:30:48 2004
+287(accept): accepting to /home/corion/mail/
+319(accept): /home/corion/mail/ is of type maildir
+326(accept): calling accept handler accept_to_maildir(/home/corion/mail/)
+481(accept_to_maildir): will write to /home/corion/mail/
+510(accept_to_maildir): writing to /home/corion/mail/tmp/1092767452.467_0.aliens
+417(write_message): writing to /home/corion/mail/tmp/1092767452.467_0.aliens; options extra_newline 0 need_from 0 need_lock 0
+452(write_message): printing self as mbox string.
+459(write_message): returning success.
+541(accept_to_maildir): maildir: hardlinking to /home/corion/mail/new/1092767452.467_1.aliens
+331(accept): delivered successfully to 1 destinations at Tue Aug 17 20:30:52 2004
+335(accept): Exiting with status DELIVERED = 0
+161(new): ------------------------------ new run at Tue Aug 17 20:32:30 2004
+165(new):    From: William McKee <william@knowmad.com>
+166(new):      To: petal@lists.webarch.co.uk
+167(new): Subject: [Petal] Modifiers and variables
+174(new): message is MIME.  MIME-Version is 1.0
+287(accept): accepting to /home/corion/mail/archive/mail.20040817
+319(accept): /home/corion/mail/archive/mail.20040817 is of type mbox
+326(accept): calling accept handler accept_to_mbox(/home/corion/mail/archive/mail.20040817)
+417(write_message): writing to /home/corion/mail/archive/mail.20040817; options extra_newline 1 need_from 1 need_lock 1
+858(audit_get_lock):   attempting to lock  file /home/corion/mail/archive/mail.20040817
+860(audit_get_lock):   successfully locked file /home/corion/mail/archive/mail.20040817
+432(write_message): No mbox From line, making one up.
+452(write_message): printing self as mbox string.
+459(write_message): returning success.
+331(accept): delivered successfully to 1 destinations at Tue Aug 17 20:32:30 2004
+287(accept): accepting to /home/corion/mail/
+319(accept): /home/corion/mail/ is of type maildir
+326(accept): calling accept handler accept_to_maildir(/home/corion/mail/)
+481(accept_to_maildir): will write to /home/corion/mail/
+510(accept_to_maildir): writing to /home/corion/mail/tmp/1092767553.526_0.aliens
+417(write_message): writing to /home/corion/mail/tmp/1092767553.526_0.aliens; options extra_newline 0 need_from 0 need_lock 0
+452(write_message): printing self as mbox string.
+459(write_message): returning success.
+541(accept_to_maildir): maildir: hardlinking to /home/corion/mail/new/1092767553.526_1.aliens
+331(accept): delivered successfully to 1 destinations at Tue Aug 17 20:32:33 2004
+335(accept): Exiting with status DELIVERED = 0
+161(new): ------------------------------ new run at Tue Aug 17 20:32:50 2004
+165(new):    From: William McKee <william@knowmad.com>
+166(new):      To: petal@lists.webarch.co.uk
+167(new): Subject: [Petal] Modifiers and variables
+174(new): message is MIME.  MIME-Version is 1.0
+287(accept): accepting to /home/corion/mail/archive/mail.20040817
+319(accept): /home/corion/mail/archive/mail.20040817 is of type mbox
+326(accept): calling accept handler accept_to_mbox(/home/corion/mail/archive/mail.20040817)
+417(write_message): writing to /home/corion/mail/archive/mail.20040817; options extra_newline 1 need_from 1 need_lock 1
+858(audit_get_lock):   attempting to lock  file /home/corion/mail/archive/mail.20040817
+860(audit_get_lock):   successfully locked file /home/corion/mail/archive/mail.20040817
+432(write_message): No mbox From line, making one up.
+452(write_message): printing self as mbox string.
+459(write_message): returning success.
+331(accept): delivered successfully to 1 destinations at Tue Aug 17 20:32:51 2004
+287(accept): accepting to /home/corion/mail/
+319(accept): /home/corion/mail/ is of type maildir
+326(accept): calling accept handler accept_to_maildir(/home/corion/mail/)
+481(accept_to_maildir): will write to /home/corion/mail/
+510(accept_to_maildir): writing to /home/corion/mail/tmp/1092767574.529_0.aliens
+417(write_message): writing to /home/corion/mail/tmp/1092767574.529_0.aliens; options extra_newline 0 need_from 0 need_lock 0
+452(write_message): printing self as mbox string.
+459(write_message): returning success.
+541(accept_to_maildir): maildir: hardlinking to /home/corion/mail/new/1092767574.529_1.aliens
+331(accept): delivered successfully to 1 destinations at Tue Aug 17 20:32:54 2004
+335(accept): Exiting with status DELIVERED = 0
+161(new): ------------------------------ new run at Tue Aug 17 20:33:11 2004
+165(new):    From: William McKee <william@knowmad.com>
+166(new):      To: petal@lists.webarch.co.uk
+167(new): Subject: [Petal] Modifiers and variables
+174(new): message is MIME.  MIME-Version is 1.0
+287(accept): accepting to /home/corion/mail/archive/mail.20040817
+319(accept): /home/corion/mail/archive/mail.20040817 is of type mbox
+326(accept): calling accept handler accept_to_mbox(/home/corion/mail/archive/mail.20040817)
+417(write_message): writing to /home/corion/mail/archive/mail.20040817; options extra_newline 1 need_from 1 need_lock 1
+858(audit_get_lock):   attempting to lock  file /home/corion/mail/archive/mail.20040817
+860(audit_get_lock):   successfully locked file /home/corion/mail/archive/mail.20040817
+432(write_message): No mbox From line, making one up.
+452(write_message): printing self as mbox string.
+459(write_message): returning success.
+331(accept): delivered successfully to 1 destinations at Tue Aug 17 20:33:11 2004
+287(accept): accepting to /home/corion/mail/
+319(accept): /home/corion/mail/ is of type maildir
+326(accept): calling accept handler accept_to_maildir(/home/corion/mail/)
+481(accept_to_maildir): will write to /home/corion/mail/
+510(accept_to_maildir): writing to /home/corion/mail/tmp/1092767595.532_0.aliens
+417(write_message): writing to /home/corion/mail/tmp/1092767595.532_0.aliens; options extra_newline 0 need_from 0 need_lock 0
+452(write_message): printing self as mbox string.
+459(write_message): returning success.
+541(accept_to_maildir): maildir: hardlinking to /home/corion/mail/new/1092767595.532_1.aliens
+331(accept): delivered successfully to 1 destinations at Tue Aug 17 20:33:15 2004
+335(accept): Exiting with status DELIVERED = 0
+161(new): ------------------------------ new run at Tue Aug 17 20:34:26 2004
+165(new):    From: William McKee <william@knowmad.com>
+166(new):      To: petal@lists.webarch.co.uk
+167(new): Subject: [Petal] Modifiers and variables
+174(new): message is MIME.  MIME-Version is 1.0
+287(accept): accepting to /home/corion/mail/archive/mail.20040817
+319(accept): /home/corion/mail/archive/mail.20040817 is of type mbox
+326(accept): calling accept handler accept_to_mbox(/home/corion/mail/archive/mail.20040817)
+417(write_message): writing to /home/corion/mail/archive/mail.20040817; options extra_newline 1 need_from 1 need_lock 1
+858(audit_get_lock):   attempting to lock  file /home/corion/mail/archive/mail.20040817
+860(audit_get_lock):   successfully locked file /home/corion/mail/archive/mail.20040817
+432(write_message): No mbox From line, making one up.
+452(write_message): printing self as mbox string.
+459(write_message): returning success.
+331(accept): delivered successfully to 1 destinations at Tue Aug 17 20:34:26 2004
+287(accept): accepting to /home/corion/mail/
+319(accept): /home/corion/mail/ is of type maildir
+326(accept): calling accept handler accept_to_maildir(/home/corion/mail/)
+481(accept_to_maildir): will write to /home/corion/mail/
+510(accept_to_maildir): writing to /home/corion/mail/tmp/1092767669.547_0.aliens
+417(write_message): writing to /home/corion/mail/tmp/1092767669.547_0.aliens; options extra_newline 0 need_from 0 need_lock 0
+452(write_message): printing self as mbox string.
+459(write_message): returning success.
+541(accept_to_maildir): maildir: hardlinking to /home/corion/mail/new/1092767669.547_1.aliens
+331(accept): delivered successfully to 1 destinations at Tue Aug 17 20:34:29 2004
+335(accept): Exiting with status DELIVERED = 0
+161(new): ------------------------------ new run at Tue Aug 17 20:39:04 2004
+165(new):    From: William McKee <william@knowmad.com>
+166(new):      To: petal@lists.webarch.co.uk
+167(new): Subject: [Petal] Modifiers and variables
+174(new): message is MIME.  MIME-Version is 1.0
+287(accept): accepting to /home/corion/mail/archive/mail.20040817
+319(accept): /home/corion/mail/archive/mail.20040817 is of type mbox
+326(accept): calling accept handler accept_to_mbox(/home/corion/mail/archive/mail.20040817)
+417(write_message): writing to /home/corion/mail/archive/mail.20040817; options extra_newline 1 need_from 1 need_lock 1
+858(audit_get_lock):   attempting to lock  file /home/corion/mail/archive/mail.20040817
+860(audit_get_lock):   successfully locked file /home/corion/mail/archive/mail.20040817
+432(write_message): No mbox From line, making one up.
+452(write_message): printing self as mbox string.
+459(write_message): returning success.
+331(accept): delivered successfully to 1 destinations at Tue Aug 17 20:39:05 2004
+287(accept): accepting to /home/corion/mail/mbox
+319(accept): /home/corion/mail/mbox is of type mbox
+326(accept): calling accept handler accept_to_mbox(/home/corion/mail/mbox)
+417(write_message): writing to /home/corion/mail/mbox; options extra_newline 1 need_from 1 need_lock 1
+858(audit_get_lock):   attempting to lock  file /home/corion/mail/mbox
+860(audit_get_lock):   successfully locked file /home/corion/mail/mbox
+432(write_message): No mbox From line, making one up.
+452(write_message): printing self as mbox string.
+459(write_message): returning success.
+331(accept): delivered successfully to 1 destinations at Tue Aug 17 20:39:08 2004
+335(accept): Exiting with status DELIVERED = 0
+178(new): encountered error during parse: mkdir /tmp/corion-mailaudit/msg-1097647384-22797-0: No space left on device

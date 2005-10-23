@@ -1,0 +1,17 @@
+startup_message off
+
+bindkey "^[OC" next
+bindkey "^[OD" prev
+
+# F1 - windowlist
+bindkey "^[[11~" windowlist -b
+
+# F8 - shrink window
+bindkey "^[[19~" resize -1
+
+# F9 - enlarge window
+bindkey "^[[20~" resize +1
+
+# F10 - new session
+bindkey "^[[21~" screen
+
