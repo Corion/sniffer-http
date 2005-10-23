@@ -59,7 +59,7 @@ sub new {
   $self;
 };
 
-=head2 C<< $conn->init_from_packet TCP>>
+=head2 C<< $conn->init_from_packet TCP >>
 
 Initializes the connection data from a packet.
 
@@ -73,7 +73,7 @@ sub init_from_packet {
   #$self->last_ack->{dest} = $tcp->{acknum};
 };
 
-=head2 C<< $conn->handle_packet TCP>>
+=head2 C<< $conn->handle_packet TCP >>
 
 Handles a packet and updates the status
 according to the packet.
