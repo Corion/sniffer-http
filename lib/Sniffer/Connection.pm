@@ -59,7 +59,7 @@ sub new {
   $self;
 };
 
-=head2 C<< $conn->init_from_packet TCP >>
+=head2 C<< $conn->init_from_packet TCP>>
 
 Initializes the connection data from a packet.
 
@@ -69,11 +69,9 @@ sub init_from_packet {
   my ($self, $tcp) = @_;
   $self->src_port($tcp->{src_port});
   $self->dest_port($tcp->{dest_port});
-
-  #$self->last_ack->{dest} = $tcp->{acknum};
 };
 
-=head2 C<< $conn->handle_packet TCP >>
+=head2 C<< $conn->handle_packet TCP>>
 
 Handles a packet and updates the status
 according to the packet.
@@ -214,5 +212,24 @@ get auto-closed to reduce resource usage.
 
 Data can only be forwarded after there has been
 the ACK packet for it!
+
+=head1 BUGS
+
+The whole module suite has almost no tests.
+
+If you experience problems, I<please> supply me with a complete,
+relevant packet dump as the included C<dump-raw.pl> creates. Even
+better, supply me with (failing) tests.
+
+=head1 AUTHOR
+
+Max Maischein (corion@cpan.org)
+
+=head1 COPYRIGHT
+
+Copyright (C) 2005 Max Maischein.  All Rights Reserved.
+
+This code is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
 
 =cut
