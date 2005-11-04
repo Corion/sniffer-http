@@ -31,7 +31,7 @@ Sniffer::HTTP - multi-connection sniffer driver
     }
   );
 
-  $sniffer->run('eth0'); # loops forever
+  $sniffer->run(); # uses the "best" default device
 
   # Or, if you want to feed it the packets yourself:
 
@@ -189,12 +189,8 @@ as necessary. If you want finer control
 over what C<Net::Pcap> does, you need to set up
 Net::Pcap yourself.
 
-On Linux, you can give the device name 'any' and it
-will listen on all interfaces.
-
-On Windows, you can give a regular expression and it
-will listen on the device whose name matches that
-regular expression.
+The C<DEVICE> parameter is used to determine
+the device via C<find_device>.
 
 =cut
 
@@ -202,18 +198,9 @@ sub run {
   my ($self,$device_name, $pcap_filter) = @_;
 
   my $device = $self->find_device($device_name);
-  $pcap_filter ||= "port 80";
+  $pcap_filter ||= "tcp port 80";
 
-  # Set up Net::Pcap
-  my ($err);
-  my %devinfo;
-  my @devs;
-  if ($Net::Pcap::VERSION < 0.07) {
-    @devs = Net::Pcap::findalldevs(\$err, \%devinfo);
-  } else {
-    @devs = Net::Pcap::findalldevs(\%devinfo, \$err);
-  };
-
+  my $err;
   my ($address, $netmask);
   if (Net::Pcap::lookupnet($device, \$address, \$netmask, \$err)) {
     die 'Unable to look up device information for ', $device, ' - ', $err;
@@ -236,17 +223,53 @@ sub run {
   ) && die 'Unable to compile packet capture filter';
   Net::Pcap::setfilter($pcap,$filter);
 
-  Net::Pcap::loop($pcap, -1, sub { $self->handle_eth_packet($_[2]) }, '') ||
-      die 'Unable to perform packet capture';
+  Net::Pcap::loop($pcap, -1, sub { $self->handle_eth_packet($_[2]) }, '') 
+    || die 'Unable to perform packet capture';
+};
+
+=head2 C<< run_file FILENAME, PCAP_FILTER >>
+
+"Listens" to the packets dumped into
+a file. This is convenient to use if you
+have packet captures from a remote machine
+or want to test new protocol sniffers.
+
+The file is presumed to contain an ethernet
+stream of packets.
+
+=cut
+
+sub run_file {
+  my ($self, $filename, $pcap_filter) = @_;
+
+  $pcap_filter ||= "tcp port 80";
+
+  my $err;
+  #   Create packet capture object from file
+  my $pcap = Net::Pcap::open_offline($filename, \$err);
+  unless (defined $pcap) {
+    croak "Unable to create packet capture from filename '$filename': $err";
+  };
+
+  my $filter;
+  Net::Pcap::compile(
+    $pcap,
+    \$filter,
+    $pcap_filter,
+    0,
+    0,
+  ) && die 'Unable to compile packet capture filter';
+  Net::Pcap::setfilter($pcap,$filter);
+
+  Net::Pcap::loop($pcap, -1, sub { $self->handle_eth_packet($_[2]) }, '');
 };
 
 =head2 C<< $sniffer->find_device DEVICE >>
 
 Finds a L<Net::Pcap> device based on some criteria:
 
-If the parameter given is a regular expression, and
-the operating system is C<MSWin32>, it
-is used to scan the descriptions of the Net::Pcap
+If the parameter given is a regular expression, 
+is used to scan the names I<and> descriptions of the Net::Pcap
 device list. The name of the first matching element
 is returned.
 
@@ -255,8 +278,8 @@ stringified parameter exists, it is returned.
 If there exists no matching device for the scalar,
 C<undef> is returned.
 
-If the parameter is not given, and there is a device
-called C<any>, that one is returned.
+If the parameter is not given or a false value, and there 
+is a device named C<any>, that one is returned.
 
 If there is only one network device, the name of
 that device is returned.
@@ -287,11 +310,7 @@ sub find_device {
   my $device = $device_name;
   if ($device_name) {
     if (ref $device_name eq 'Regexp') {
-      if ($^O eq 'MSWin32') {
-        ($device) = grep {$devinfo{$_} =~ /$device_name/} keys %devinfo;
-      } else {
-        die "It doesn't make sense to me to scan the devices on $^O.";
-      };
+      ($device) = grep {$_ =~ /$device_name/ || $_ =~ $devinfo{$_}} keys %devinfo;
     } elsif (exists $devinfo{$device_name}) {
       $device = $device_name;
     } else {
