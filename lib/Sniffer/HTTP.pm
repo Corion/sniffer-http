@@ -11,7 +11,7 @@ use Carp qw(croak);
 
 use vars qw($VERSION);
 
-$VERSION = '0.07';
+$VERSION = '0.08';
 
 =head1 NAME
 
@@ -246,13 +246,13 @@ Finds a L<Net::Pcap> device based on some criteria:
 
 If the parameter given is a regular expression, and
 the operating system is C<MSWin32>, it
-is used to scan the descriptions of the Net::Pcap 
+is used to scan the descriptions of the Net::Pcap
 device list. The name of the first matching element
 is returned.
 
 If a L<Net::Pcap> device matching the
 stringified parameter exists, it is returned.
-If there exists no matching device for the scalar, 
+If there exists no matching device for the scalar,
 C<undef> is returned.
 
 If the parameter is not given, and there is a device
@@ -261,7 +261,7 @@ called C<any>, that one is returned.
 If there is only one network device, the name of
 that device is returned.
 
-If there is only one device left after removing all 
+If there is only one device left after removing all
 network devices with IP address 127.0.0.1, the name
 of that device is returned.
 
@@ -305,11 +305,11 @@ sub find_device {
     } else {
       # Now we need to actually look at the devices and select the
       # one with the default gateway:
-      
+
       # First, get the default gateway by using
       # `netstat -rn`
       my $device_ip;
-      my $re_if = $^O eq 'MSWin32' 
+      my $re_if = $^O eq 'MSWin32'
                   ? qr/^\s*(?:0.0.0.0)\s+(\S+)\s+(\S+)\s+/
                   : qr/^(?:0.0.0.0|default)\s+(\S+)\s+.*?(\S+)\s*$/;
       for (qx{netstat -rn}) {
@@ -319,20 +319,20 @@ sub find_device {
           last;
         };
       };
-      
+
       if (! $device_ip) {
         croak "Couldn't find IP address/interface of the default gateway interface. Maybe 'netstat' is unavailable?";
       };
-      
+
       if (exists $devinfo{$device_ip}) {
         return $device_ip
       };
 
       # Looks like we got an IP and not an interface name.
       # So scan all interfaces if they have that our IP address.
-      
+
       my $good_address = unpack "N", pack "C4", (split /\./, $device_ip);
-      
+
       my @good_devices;
       for my $device (@devs) {
         my ($address, $netmask);
@@ -341,24 +341,48 @@ sub find_device {
         for ($address,$netmask) {
           $_ = unpack "N", pack "N", $_;
         };
-        
+
         if ($address == ($good_address & $netmask)) {
           push @good_devices, $device;
         };
       };
-      
+
       if (@good_devices == 1) {
         $device = $good_devices[0];
       } elsif (@good_devices > 1) {
         croak "Too many device candidates found (@good_devices)";
-      }      
+      }
     };
   };
-  
+
   return $device
 };
 
 1;
+
+=head1 CALLBACKS
+
+=head2 C<<request REQ, CONN>>
+
+The C<request> callback is called with the parsed request and the connection
+object. The request will be an instance of [cpan://HTTP::Request] and will
+have an absolute URI if possible. Currently, the hostname for the absolute URI
+is constructed from the C<Host:> header.
+
+=head2 C<<response RES, REQ, CONN>>
+
+The C<response> callback is called with the parsed response, the request
+and the connection object.
+
+=head2 C<<log MESSAGE>>
+
+The C<log> callback is called whenever the connection makes progress
+and in other various situations.
+
+=head2 C<<tcp_log MESSAGE>>
+
+The C<tcp_log> callback is passed on to the underlying C<Sniffer::Connection>
+object and can be used to monitor the TCP connection.
 
 =head1 EXAMPLE PCAP FILTERS
 

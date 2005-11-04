@@ -1,3 +1,10 @@
+- guard against ->run(qr//), ->run(undef), ->run("")
+- Make request absolute from Host: header
+- Find and remember port number from TCP packets
+  and put it in the request
+- implement multiple outstanding requests/responses
+- Add (example of) reading from an ethereal capture
+
 v0.07 - Added Pcap example filters
       - added much more magic to select a suitable interface
         to listen on. See find_device().

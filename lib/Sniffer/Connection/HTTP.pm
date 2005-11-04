@@ -31,7 +31,7 @@ use base 'Class::Accessor';
 
 use vars qw($VERSION);
 
-$VERSION = '0.07';
+$VERSION = '0.08';
 
 my @callbacks = qw(request response closed log);
 __PACKAGE__->mk_accessors(qw(tcp_connection sent_buffer recv_buffer _response _response_chunk_size _response_len _request prev_request),
@@ -211,6 +211,16 @@ sub flush_sent {
       $self->log->("Got header");
       my $h = $1;
       $req = HTTP::Request->parse($h);
+      
+      my $host = "???";
+      # should be the IP address of some TCP packet ...
+      if ($req->header('Host')) {
+        $host = $req->header('Host');
+      };
+      $req->uri->scheme('http');
+      $req->uri->host($host);
+      #$req->uri->port(80); # fix from TCP packet!
+      
       $self->_request($req);
     };
 
@@ -255,6 +265,8 @@ logic here.
 Every response accumulates all data in memory instead of
 giving the user the partial response so it can be written
 to disk. This should maybe later be improved.
+
+=back
 
 =head1 BUGS
 
