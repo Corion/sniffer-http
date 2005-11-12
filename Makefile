@@ -1,7 +1,7 @@
 # This Makefile is for the Sniffer::HTTP extension to perl.
 #
 # It was generated automatically by MakeMaker version
-# 6.17 (Revision: 1.133) from the contents of
+# 6.25 (Revision: 1.147) from the contents of
 # Makefile.PL. Don't edit this file, edit Makefile.PL instead.
 #
 #       ANY CHANGES MADE HERE WILL BE LOST!
@@ -13,7 +13,7 @@
 #     ABSTRACT_FROM => q[lib/Sniffer/HTTP.pm]
 #     AUTHOR => q[Max Maischein <corion@cpan.org>]
 #     NAME => q[Sniffer::HTTP]
-#     PREREQ_PM => { Net::Pcap=>q[0.04], NetPacket::TCP=>q[0], Class::Data::Inheritable=>q[0], Class::Accessor=>q[0], HTTP::Request=>q[0] }
+#     PREREQ_PM => { Net::Pcap=>q[0.09], NetPacket::TCP=>q[0], Class::Data::Inheritable=>q[0], Class::Accessor=>q[0], LWP::Simple=>q[0], HTTP::Request=>q[0] }
 #     VERSION_FROM => q[lib/Sniffer/HTTP.pm]
 
 # --- MakeMaker post_initialize section:
@@ -21,101 +21,101 @@
 
 # --- MakeMaker const_config section:
 
-# These definitions are from config.sh (via /opt/perl/lib/5.8.4/i686-linux-thread-multi/Config.pm)
+# These definitions are from config.sh (via c:/perl/5.8.5/lib/Config.pm)
 
 # They may have been overridden via Makefile.PL or on the command line
-AR = ar
-CC = cc
-CCCDLFLAGS = -fpic
-CCDLFLAGS = -Wl,-E
-DLEXT = so
-DLSRC = dl_dlopen.xs
-LD = cc
-LDDLFLAGS = -shared -L/usr/local/lib
-LDFLAGS =  -L/usr/local/lib
-LIBC = /lib/libc-2.2.5.so
-LIB_EXT = .a
-OBJ_EXT = .o
-OSNAME = linux
-OSVERS = 2.4.25
-RANLIB = :
-SITELIBEXP = /opt/perl/lib/site_perl/5.8.4
-SITEARCHEXP = /opt/perl/lib/site_perl/5.8.4/i686-linux-thread-multi
-SO = so
-EXE_EXT = 
-FULL_AR = /usr/bin/ar
+AR = link /lib
+CC = cl
+CCCDLFLAGS =  
+CCDLFLAGS =  
+DLEXT = dll
+DLSRC = dl_win32.xs
+LD = link
+LDDLFLAGS = -dll -nologo -nodefaultlib -debug -opt:ref,icf  -libpath:"c:\perl\5.8.5\lib\CORE"  -machine:x86
+LDFLAGS = -nologo -nodefaultlib -debug -opt:ref,icf  -libpath:"c:\perl\5.8.5\lib\CORE"  -machine:x86
+LIBC = msvcrt.lib
+LIB_EXT = .lib
+OBJ_EXT = .obj
+OSNAME = MSWin32
+OSVERS = 4.0
+RANLIB = rem
+SITELIBEXP = c:\perl\site\5.8.5\lib
+SITEARCHEXP = c:\perl\site\5.8.5\lib
+SO = dll
+EXE_EXT = .exe
+FULL_AR = 
 VENDORARCHEXP = 
 VENDORLIBEXP = 
 
 
 # --- MakeMaker constants section:
 AR_STATIC_ARGS = cr
-DIRFILESEP = /
+DIRFILESEP = ^\
 NAME = Sniffer::HTTP
 NAME_SYM = Sniffer_HTTP
-VERSION = 0.04
+VERSION = 0.12
 VERSION_MACRO = VERSION
-VERSION_SYM = 0_04
+VERSION_SYM = 0_12
 DEFINE_VERSION = -D$(VERSION_MACRO)=\"$(VERSION)\"
-XS_VERSION = 0.04
+XS_VERSION = 0.12
 XS_VERSION_MACRO = XS_VERSION
 XS_DEFINE_VERSION = -D$(XS_VERSION_MACRO)=\"$(XS_VERSION)\"
-INST_ARCHLIB = blib/arch
-INST_SCRIPT = blib/script
-INST_BIN = blib/bin
-INST_LIB = blib/lib
-INST_MAN1DIR = blib/man1
-INST_MAN3DIR = blib/man3
+INST_ARCHLIB = blib\arch
+INST_SCRIPT = blib\script
+INST_BIN = blib\bin
+INST_LIB = blib\lib
+INST_MAN1DIR = blib\man1
+INST_MAN3DIR = blib\man3
 MAN1EXT = 1
 MAN3EXT = 3
 INSTALLDIRS = site
 DESTDIR = 
-PREFIX = 
-PERLPREFIX = /opt/perl
-SITEPREFIX = /opt/perl
+PREFIX = $(SITEPREFIX)
+PERLPREFIX = c:\perl\5.8.5
+SITEPREFIX = c:\perl\site\5.8.5
 VENDORPREFIX = 
-INSTALLPRIVLIB = $(PERLPREFIX)/lib/5.8.4
+INSTALLPRIVLIB = c:\perl\5.8.5\lib
 DESTINSTALLPRIVLIB = $(DESTDIR)$(INSTALLPRIVLIB)
-INSTALLSITELIB = $(SITEPREFIX)/lib/site_perl/5.8.4
+INSTALLSITELIB = c:\perl\site\5.8.5\lib
 DESTINSTALLSITELIB = $(DESTDIR)$(INSTALLSITELIB)
 INSTALLVENDORLIB = 
 DESTINSTALLVENDORLIB = $(DESTDIR)$(INSTALLVENDORLIB)
-INSTALLARCHLIB = $(PERLPREFIX)/lib/5.8.4/i686-linux-thread-multi
+INSTALLARCHLIB = c:\perl\5.8.5\lib
 DESTINSTALLARCHLIB = $(DESTDIR)$(INSTALLARCHLIB)
-INSTALLSITEARCH = $(SITEPREFIX)/lib/site_perl/5.8.4/i686-linux-thread-multi
+INSTALLSITEARCH = c:\perl\site\5.8.5\lib
 DESTINSTALLSITEARCH = $(DESTDIR)$(INSTALLSITEARCH)
 INSTALLVENDORARCH = 
 DESTINSTALLVENDORARCH = $(DESTDIR)$(INSTALLVENDORARCH)
-INSTALLBIN = $(PERLPREFIX)/bin
+INSTALLBIN = c:\perl\5.8.5\bin
 DESTINSTALLBIN = $(DESTDIR)$(INSTALLBIN)
-INSTALLSITEBIN = $(SITEPREFIX)/bin
+INSTALLSITEBIN = c:\perl\5.8.5\bin
 DESTINSTALLSITEBIN = $(DESTDIR)$(INSTALLSITEBIN)
 INSTALLVENDORBIN = 
 DESTINSTALLVENDORBIN = $(DESTDIR)$(INSTALLVENDORBIN)
-INSTALLSCRIPT = $(PERLPREFIX)/bin
+INSTALLSCRIPT = c:\perl\5.8.5\bin
 DESTINSTALLSCRIPT = $(DESTDIR)$(INSTALLSCRIPT)
-INSTALLMAN1DIR = $(PERLPREFIX)/man/man1
+INSTALLMAN1DIR = c:\perl\5.8.5\man\man1
 DESTINSTALLMAN1DIR = $(DESTDIR)$(INSTALLMAN1DIR)
-INSTALLSITEMAN1DIR = $(SITEPREFIX)/man/man1
+INSTALLSITEMAN1DIR = $(INSTALLMAN1DIR)
 DESTINSTALLSITEMAN1DIR = $(DESTDIR)$(INSTALLSITEMAN1DIR)
 INSTALLVENDORMAN1DIR = 
 DESTINSTALLVENDORMAN1DIR = $(DESTDIR)$(INSTALLVENDORMAN1DIR)
-INSTALLMAN3DIR = $(PERLPREFIX)/man/man3
+INSTALLMAN3DIR = c:\perl\5.8.5\man\man3
 DESTINSTALLMAN3DIR = $(DESTDIR)$(INSTALLMAN3DIR)
-INSTALLSITEMAN3DIR = $(SITEPREFIX)/man/man3
+INSTALLSITEMAN3DIR = $(INSTALLMAN3DIR)
 DESTINSTALLSITEMAN3DIR = $(DESTDIR)$(INSTALLSITEMAN3DIR)
 INSTALLVENDORMAN3DIR = 
 DESTINSTALLVENDORMAN3DIR = $(DESTDIR)$(INSTALLVENDORMAN3DIR)
-PERL_LIB = /opt/perl/lib/5.8.4
-PERL_ARCHLIB = /opt/perl/lib/5.8.4/i686-linux-thread-multi
-LIBPERL_A = libperl.a
+PERL_LIB = c:\perl\5.8.5\lib
+PERL_ARCHLIB = c:\perl\5.8.5\lib
+LIBPERL_A = libperl.lib
 FIRST_MAKEFILE = Makefile
-MAKEFILE_OLD = $(FIRST_MAKEFILE).old
-MAKE_APERL_FILE = $(FIRST_MAKEFILE).aperl
+MAKEFILE_OLD = Makefile.old
+MAKE_APERL_FILE = Makefile.aperl
 PERLMAINCC = $(CC)
-PERL_INC = /opt/perl/lib/5.8.4/i686-linux-thread-multi/CORE
-PERL = /opt/perl/bin/perl5.8.4
-FULLPERL = /opt/perl/bin/perl5.8.4
+PERL_INC = C:\perl\5.8.5\lib\CORE
+PERL = C:\perl\5.8.5\bin\perl.exe
+FULLPERL = C:\perl\5.8.5\bin\perl.exe
 ABSPERL = $(PERL)
 PERLRUN = $(PERL)
 FULLPERLRUN = $(FULLPERL)
@@ -127,15 +127,15 @@ PERL_CORE = 0
 PERM_RW = 644
 PERM_RWX = 755
 
-MAKEMAKER   = /opt/perl/lib/5.8.4/ExtUtils/MakeMaker.pm
-MM_VERSION  = 6.17
-MM_REVISION = 1.133
+MAKEMAKER   = c:/perl/5.8.5/lib/ExtUtils/MakeMaker.pm
+MM_VERSION  = 6.25
+MM_REVISION = 1.147
 
 # FULLEXT = Pathname for extension directory (eg Foo/Bar/Oracle).
 # BASEEXT = Basename part of FULLEXT. May be just equal FULLEXT. (eg Oracle)
 # PARENT_NAME = NAME without BASEEXT and no trailing :: (eg Foo::Bar)
 # DLBASE  = Basename part of dynamic library. May be just equal BASEEXT.
-FULLEXT = Sniffer/HTTP
+FULLEXT = Sniffer\HTTP
 BASEEXT = HTTP
 PARENT_NAME = Sniffer
 DLBASE = $(BASEEXT)
@@ -150,7 +150,8 @@ C_FILES  =
 O_FILES  = 
 H_FILES  = 
 MAN1PODS = 
-MAN3PODS = lib/Sniffer/Connection.pm \
+MAN3PODS = lib/Net/Pcap/FindDevice.pm \
+	lib/Sniffer/Connection.pm \
 	lib/Sniffer/Connection/HTTP.pm \
 	lib/Sniffer/HTTP.pm
 
@@ -158,42 +159,44 @@ MAN3PODS = lib/Sniffer/Connection.pm \
 CONFIGDEP = $(PERL_ARCHLIB)$(DIRFILESEP)Config.pm $(PERL_INC)$(DIRFILESEP)config.h
 
 # Where to build things
-INST_LIBDIR      = $(INST_LIB)/Sniffer
-INST_ARCHLIBDIR  = $(INST_ARCHLIB)/Sniffer
+INST_LIBDIR      = $(INST_LIB)\Sniffer
+INST_ARCHLIBDIR  = $(INST_ARCHLIB)\Sniffer
 
-INST_AUTODIR     = $(INST_LIB)/auto/$(FULLEXT)
-INST_ARCHAUTODIR = $(INST_ARCHLIB)/auto/$(FULLEXT)
+INST_AUTODIR     = $(INST_LIB)\auto\$(FULLEXT)
+INST_ARCHAUTODIR = $(INST_ARCHLIB)\auto\$(FULLEXT)
 
 INST_STATIC      = 
 INST_DYNAMIC     = 
 INST_BOOT        = 
 
 # Extra linker info
-EXPORT_LIST        = 
-PERL_ARCHIVE       = 
+EXPORT_LIST        = $(BASEEXT).def
+PERL_ARCHIVE       = $(PERL_INC)\perl58.lib
 PERL_ARCHIVE_AFTER = 
 
 
-TO_INST_PM = lib/Sniffer/Connection.pm \
+TO_INST_PM = lib/Net/Pcap/FindDevice.pm \
+	lib/Sniffer/Connection.pm \
 	lib/Sniffer/Connection/HTTP.pm \
 	lib/Sniffer/HTTP.pm
 
 PM_TO_BLIB = lib/Sniffer/HTTP.pm \
-	blib/lib/Sniffer/HTTP.pm \
+	blib\lib\Sniffer\HTTP.pm \
 	lib/Sniffer/Connection/HTTP.pm \
-	blib/lib/Sniffer/Connection/HTTP.pm \
+	blib\lib\Sniffer\Connection\HTTP.pm \
 	lib/Sniffer/Connection.pm \
-	blib/lib/Sniffer/Connection.pm
+	blib\lib\Sniffer\Connection.pm \
+	lib/Net/Pcap/FindDevice.pm \
+	blib\lib\Net\Pcap\FindDevice.pm
 
 
 # --- MakeMaker platform_constants section:
-MM_Unix_VERSION = 1.42
-PERL_MALLOC_DEF = -DPERL_EXTMALLOC_DEF -Dmalloc=Perl_malloc -Dfree=Perl_mfree -Drealloc=Perl_realloc -Dcalloc=Perl_calloc
+MM_Win32_VERSION = 1.10
 
 
 # --- MakeMaker tool_autosplit section:
 # Usage: $(AUTOSPLITFILE) FileToSplit AutoDirToSplitInto
-AUTOSPLITFILE = $(PERLRUN)  -e 'use AutoSplit;  autosplit($$ARGV[0], $$ARGV[1], 0, 1, 1)'
+AUTOSPLITFILE = $(ABSPERLRUN)  -e "use AutoSplit;  autosplit($$ARGV[0], $$ARGV[1], 0, 1, 1)"
 
 
 
@@ -201,28 +204,27 @@ AUTOSPLITFILE = $(PERLRUN)  -e 'use AutoSplit;  autosplit($$ARGV[0], $$ARGV[1], 
 
 
 # --- MakeMaker tools_other section:
-SHELL = /bin/sh
-CHMOD = chmod
-CP = cp
-MV = mv
-NOOP = $(SHELL) -c true
+CHMOD = $(ABSPERLRUN) -MExtUtils::Command -e chmod
+CP = $(ABSPERLRUN) -MExtUtils::Command -e cp
+MV = $(ABSPERLRUN) -MExtUtils::Command -e mv
+NOOP = rem
 NOECHO = @
-RM_F = rm -f
-RM_RF = rm -rf
-TEST_F = test -f
-TOUCH = touch
+RM_F = $(ABSPERLRUN) -MExtUtils::Command -e rm_f
+RM_RF = $(ABSPERLRUN) -MExtUtils::Command -e rm_rf
+TEST_F = $(ABSPERLRUN) -MExtUtils::Command -e test_f
+TOUCH = $(ABSPERLRUN) -MExtUtils::Command -e touch
 UMASK_NULL = umask 0
-DEV_NULL = > /dev/null 2>&1
-MKPATH = $(PERLRUN) "-MExtUtils::Command" -e mkpath
-EQUALIZE_TIMESTAMP = $(PERLRUN) "-MExtUtils::Command" -e eqtime
-ECHO = echo
-ECHO_N = echo -n
+DEV_NULL = > NUL
+MKPATH = $(ABSPERLRUN) "-MExtUtils::Command" -e mkpath
+EQUALIZE_TIMESTAMP = $(ABSPERLRUN) "-MExtUtils::Command" -e eqtime
+ECHO = $(ABSPERLRUN) -l -e "print qq{@ARGV}"
+ECHO_N = $(ABSPERLRUN)  -e "print qq{@ARGV}"
 UNINST = 0
 VERBINST = 0
-MOD_INSTALL = $(PERLRUN) -MExtUtils::Install -e 'install({@ARGV}, '\''$(VERBINST)'\'', 0, '\''$(UNINST)'\'');'
-DOC_INSTALL = $(PERLRUN) "-MExtUtils::Command::MM" -e perllocal_install
-UNINSTALL = $(PERLRUN) "-MExtUtils::Command::MM" -e uninstall
-WARN_IF_OLD_PACKLIST = $(PERLRUN) "-MExtUtils::Command::MM" -e warn_if_old_packlist
+MOD_INSTALL = $(ABSPERLRUN) -MExtUtils::Install -e "install({@ARGV}, '$(VERBINST)', 0, '$(UNINST)');"
+DOC_INSTALL = $(ABSPERLRUN) "-MExtUtils::Command::MM" -e perllocal_install
+UNINSTALL = $(ABSPERLRUN) "-MExtUtils::Command::MM" -e uninstall
+WARN_IF_OLD_PACKLIST = $(ABSPERLRUN) "-MExtUtils::Command::MM" -e warn_if_old_packlist
 
 
 # --- MakeMaker makemakerdflt section:
@@ -246,7 +248,7 @@ RCS_LABEL = rcs -Nv$(VERSION_SYM): -q
 DIST_CP = best
 DIST_DEFAULT = tardist
 DISTNAME = Sniffer-HTTP
-DISTVNAME = Sniffer-HTTP-0.04
+DISTVNAME = Sniffer-HTTP-0.12
 
 
 # --- MakeMaker macro section:
@@ -268,15 +270,7 @@ DISTVNAME = Sniffer-HTTP-0.04
 
 
 # --- MakeMaker pasthru section:
-
-PASTHRU = LIB="$(LIB)"\
-	LIBPERL_A="$(LIBPERL_A)"\
-	LINKTYPE="$(LINKTYPE)"\
-	PREFIX="$(PREFIX)"\
-	OPTIMIZE="$(OPTIMIZE)"\
-	PASTHRU_DEFINE="$(PASTHRU_DEFINE)"\
-	PASTHRU_INC="$(PASTHRU_INC)"
-
+PASTHRU = -nologo
 
 # --- MakeMaker special_targets section:
 .SUFFIXES: .xs .c .C .cpp .i .s .cxx .cc $(OBJ_EXT)
@@ -295,55 +289,38 @@ PASTHRU = LIB="$(LIB)"\
 
 
 # --- MakeMaker top_targets section:
-all :: pure_all manifypods
+all :: pure_all
 	$(NOECHO) $(NOOP)
 
 
-pure_all :: config pm_to_blib subdirs linkext
+pure_all :: config pm_to_blib.ts subdirs linkext
 	$(NOECHO) $(NOOP)
 
 subdirs :: $(MYEXTLIB)
 	$(NOECHO) $(NOOP)
 
-config :: $(FIRST_MAKEFILE) $(INST_LIBDIR)$(DIRFILESEP).exists
+config :: $(FIRST_MAKEFILE) blibdirs.ts
 	$(NOECHO) $(NOOP)
 
-config :: $(INST_ARCHAUTODIR)$(DIRFILESEP).exists
-	$(NOECHO) $(NOOP)
-
-config :: $(INST_AUTODIR)$(DIRFILESEP).exists
-	$(NOECHO) $(NOOP)
-
-$(INST_AUTODIR)/.exists :: /opt/perl/lib/5.8.4/i686-linux-thread-multi/CORE/perl.h
-	$(NOECHO) $(MKPATH) $(INST_AUTODIR)
-	$(NOECHO) $(EQUALIZE_TIMESTAMP) /opt/perl/lib/5.8.4/i686-linux-thread-multi/CORE/perl.h $(INST_AUTODIR)/.exists
-
-	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_AUTODIR)
-
-$(INST_LIBDIR)/.exists :: /opt/perl/lib/5.8.4/i686-linux-thread-multi/CORE/perl.h
-	$(NOECHO) $(MKPATH) $(INST_LIBDIR)
-	$(NOECHO) $(EQUALIZE_TIMESTAMP) /opt/perl/lib/5.8.4/i686-linux-thread-multi/CORE/perl.h $(INST_LIBDIR)/.exists
-
-	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_LIBDIR)
-
-$(INST_ARCHAUTODIR)/.exists :: /opt/perl/lib/5.8.4/i686-linux-thread-multi/CORE/perl.h
-	$(NOECHO) $(MKPATH) $(INST_ARCHAUTODIR)
-	$(NOECHO) $(EQUALIZE_TIMESTAMP) /opt/perl/lib/5.8.4/i686-linux-thread-multi/CORE/perl.h $(INST_ARCHAUTODIR)/.exists
-
-	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_ARCHAUTODIR)
-
-config :: $(INST_MAN3DIR)$(DIRFILESEP).exists
-	$(NOECHO) $(NOOP)
-
-
-$(INST_MAN3DIR)/.exists :: /opt/perl/lib/5.8.4/i686-linux-thread-multi/CORE/perl.h
-	$(NOECHO) $(MKPATH) $(INST_MAN3DIR)
-	$(NOECHO) $(EQUALIZE_TIMESTAMP) /opt/perl/lib/5.8.4/i686-linux-thread-multi/CORE/perl.h $(INST_MAN3DIR)/.exists
-
-	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_MAN3DIR)
-
-help:
+help :
 	perldoc ExtUtils::MakeMaker
+
+
+# --- MakeMaker blibdirs section:
+
+blibdirs.ts :
+	$(NOECHO) $(MKPATH) \
+	  $(INST_LIBDIR) $(INST_ARCHLIB) \
+	  $(INST_AUTODIR) $(INST_ARCHAUTODIR) \
+	  $(INST_BIN) $(INST_SCRIPT) \
+	  $(INST_MAN1DIR) $(INST_MAN3DIR) 
+	$(NOECHO) $(CHMOD) 755 \
+	  $(INST_LIBDIR) $(INST_ARCHLIB) \
+	  $(INST_AUTODIR) $(INST_ARCHAUTODIR) \
+	  $(INST_BIN) $(INST_SCRIPT) \
+	  $(INST_MAN1DIR) $(INST_MAN3DIR) 
+	$(NOECHO) $(TOUCH) $@
+
 
 
 # --- MakeMaker linkext section:
@@ -353,6 +330,10 @@ linkext :: $(LINKTYPE)
 
 
 # --- MakeMaker dlsyms section:
+
+HTTP.def: Makefile.PL
+	$(PERLRUN) -MExtUtils::Mksymlists \
+     -e "Mksymlists('NAME'=>\"Sniffer::HTTP\", 'DLBASE' => '$(BASEEXT)', 'DL_FUNCS' => {  }, 'FUNCLIST' => [], 'IMPORTS' => {  }, 'DL_VARS' => []);"
 
 
 # --- MakeMaker dynamic section:
@@ -390,13 +371,16 @@ manifypods : pure_all  \
 	lib/Sniffer/HTTP.pm \
 	lib/Sniffer/Connection/HTTP.pm \
 	lib/Sniffer/Connection.pm \
+	lib/Net/Pcap/FindDevice.pm \
 	lib/Sniffer/HTTP.pm \
 	lib/Sniffer/Connection/HTTP.pm \
-	lib/Sniffer/Connection.pm
-	$(NOECHO) $(POD2MAN) --section=3 --perm_rw=$(PERM_RW)\
-	  lib/Sniffer/HTTP.pm $(INST_MAN3DIR)/Sniffer::HTTP.$(MAN3EXT) \
-	  lib/Sniffer/Connection/HTTP.pm $(INST_MAN3DIR)/Sniffer::Connection::HTTP.$(MAN3EXT) \
-	  lib/Sniffer/Connection.pm $(INST_MAN3DIR)/Sniffer::Connection.$(MAN3EXT) 
+	lib/Sniffer/Connection.pm \
+	lib/Net/Pcap/FindDevice.pm
+	$(NOECHO) $(POD2MAN) --section=3 --perm_rw=$(PERM_RW) \
+	  lib/Sniffer/HTTP.pm $(INST_MAN3DIR)\Sniffer.HTTP.$(MAN3EXT) \
+	  lib/Sniffer/Connection/HTTP.pm $(INST_MAN3DIR)\Sniffer.Connection.HTTP.$(MAN3EXT) \
+	  lib/Sniffer/Connection.pm $(INST_MAN3DIR)\Sniffer.Connection.$(MAN3EXT) \
+	  lib/Net/Pcap/FindDevice.pm $(INST_MAN3DIR)\Net.Pcap.FindDevice.$(MAN3EXT) 
 
 
 
@@ -422,8 +406,11 @@ clean_subdirs :
 # the Makefile here so a later make realclean still has a makefile to use.
 
 clean :: clean_subdirs
-	-$(RM_RF) ./blib $(MAKE_APERL_FILE) $(INST_ARCHAUTODIR)/extralibs.all $(INST_ARCHAUTODIR)/extralibs.ld perlmain.c tmon.out mon.out so_locations pm_to_blib *$(OBJ_EXT) *$(LIB_EXT) perl.exe perl perl$(EXE_EXT) $(BOOTSTRAP) $(BASEEXT).bso $(BASEEXT).def lib$(BASEEXT).def $(BASEEXT).exp $(BASEEXT).x core core.*perl.*.? *perl.core core.[0-9] core.[0-9][0-9] core.[0-9][0-9][0-9] core.[0-9][0-9][0-9][0-9] core.[0-9][0-9][0-9][0-9][0-9]
+	-$(RM_RF) ./blib $(MAKE_APERL_FILE) $(INST_ARCHAUTODIR)/extralibs.all $(INST_ARCHAUTODIR)/extralibs.ld perlmain.c tmon.out mon.out so_locations blibdirs.ts pm_to_blib.ts *$(OBJ_EXT) *$(LIB_EXT) perl.exe perl perl$(EXE_EXT) $(BOOTSTRAP) $(BASEEXT).bso $(BASEEXT).def lib$(BASEEXT).def $(BASEEXT).exp $(BASEEXT).x core core.*perl.*.? *perl.core core.[0-9] core.[0-9][0-9] core.[0-9][0-9][0-9] core.[0-9][0-9][0-9][0-9] core.[0-9][0-9][0-9][0-9][0-9]
 	-$(MV) $(FIRST_MAKEFILE) $(MAKEFILE_OLD) $(DEV_NULL)
+clean ::
+	-$(RM_F) *.pdb
+
 
 
 # --- MakeMaker realclean_subdirs section:
@@ -437,32 +424,46 @@ realclean_subdirs :
 realclean purge ::  clean realclean_subdirs
 	$(RM_RF) $(INST_AUTODIR) $(INST_ARCHAUTODIR)
 	$(RM_RF) $(DISTVNAME)
-	$(RM_F)  blib/lib/Sniffer/Connection.pm blib/lib/Sniffer/Connection/HTTP.pm blib/lib/Sniffer/HTTP.pm $(MAKEFILE_OLD) $(FIRST_MAKEFILE)
+	$(RM_RF)  blib\lib\Sniffer\Connection\HTTP.pm $(MAKEFILE_OLD) $(FIRST_MAKEFILE) blib\lib\Net\Pcap\FindDevice.pm blib\lib\Sniffer\Connection.pm blib\lib\Sniffer\HTTP.pm
 
 
 # --- MakeMaker metafile section:
 metafile :
-	$(NOECHO) $(ECHO) '# http://module-build.sourceforge.net/META-spec.html' > META.yml
-	$(NOECHO) $(ECHO) '#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#' >> META.yml
-	$(NOECHO) $(ECHO) 'name:         Sniffer-HTTP' >> META.yml
-	$(NOECHO) $(ECHO) 'version:      0.04' >> META.yml
-	$(NOECHO) $(ECHO) 'version_from: lib/Sniffer/HTTP.pm' >> META.yml
-	$(NOECHO) $(ECHO) 'installdirs:  site' >> META.yml
-	$(NOECHO) $(ECHO) 'requires:' >> META.yml
-	$(NOECHO) $(ECHO) '    Class::Accessor:               0' >> META.yml
-	$(NOECHO) $(ECHO) '    Class::Data::Inheritable:      0' >> META.yml
-	$(NOECHO) $(ECHO) '    HTTP::Request:                 0' >> META.yml
-	$(NOECHO) $(ECHO) '    Net::Pcap:                     0.04' >> META.yml
-	$(NOECHO) $(ECHO) '    NetPacket::TCP:                0' >> META.yml
-	$(NOECHO) $(ECHO) '' >> META.yml
-	$(NOECHO) $(ECHO) 'distribution_type: module' >> META.yml
-	$(NOECHO) $(ECHO) 'generated_by: ExtUtils::MakeMaker version 6.17' >> META.yml
+	$(NOECHO) $(ECHO) Generating META.yml
+	$(NOECHO) $(ECHO) "# http://module-build.sourceforge.net/META-spec.html" > META_new.yml
+	$(NOECHO) $(ECHO) "#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#" >> META_new.yml
+	$(NOECHO) $(ECHO) "name:         Sniffer-HTTP" >> META_new.yml
+	$(NOECHO) $(ECHO) "version:      0.12" >> META_new.yml
+	$(NOECHO) $(ECHO) "version_from: lib/Sniffer/HTTP.pm" >> META_new.yml
+	$(NOECHO) $(ECHO) "installdirs:  site" >> META_new.yml
+	$(NOECHO) $(ECHO) "requires:" >> META_new.yml
+	$(NOECHO) $(ECHO) "    Class::Accessor:               0" >> META_new.yml
+	$(NOECHO) $(ECHO) "    Class::Data::Inheritable:      0" >> META_new.yml
+	$(NOECHO) $(ECHO) "    HTTP::Request:                 0" >> META_new.yml
+	$(NOECHO) $(ECHO) "    LWP::Simple:                   0" >> META_new.yml
+	$(NOECHO) $(ECHO) "    Net::Pcap:                     0.09" >> META_new.yml
+	$(NOECHO) $(ECHO) "    NetPacket::TCP:                0" >> META_new.yml
+	$(NOECHO) $(ECHO) "" >> META_new.yml
+	$(NOECHO) $(ECHO) "distribution_type: module" >> META_new.yml
+	$(NOECHO) $(ECHO) "generated_by: ExtUtils::MakeMaker version 6.25" >> META_new.yml
+	-$(NOECHO) $(ABSPERLRUN) -MExtUtils::Command -MFile::Compare -e "compare(@ARGV) != 0 ? (mv or warn \"Cannot move @ARGV: $$!\n\") : unlink(shift);" META_new.yml META.yml
 
 
 # --- MakeMaker metafile_addtomanifest section:
 metafile_addtomanifest:
-	$(NOECHO) $(PERLRUN) -MExtUtils::Manifest=maniadd -e 'eval { maniadd({q{META.yml} => q{Module meta-data (added by MakeMaker)}}) } ' \
-	-e '    or print "Could not add META.yml to MANIFEST: $${'\''@'\''}\n"'
+	$(NOECHO) $(ECHO) Adding META.yml to MANIFEST
+	$(NOECHO) $(ABSPERLRUN) -MExtUtils::Manifest=maniadd -e "eval { maniadd({q{META.yml} => q{Module meta-data (added by MakeMaker)}}) } \
+    or print \"Could not add META.yml to MANIFEST: $${'@'}\n\""
+
+
+# --- MakeMaker signature section:
+signature :
+	$(NOECHO) $(NOOP)
+
+
+# --- MakeMaker signature_addtomanifest section:
+signature_addtomanifest :
+	$(NOECHO) $(NOOP)
 
 
 # --- MakeMaker dist_basics section:
@@ -486,8 +487,8 @@ veryclean : realclean
 # --- MakeMaker dist_core section:
 
 dist : $(DIST_DEFAULT) $(FIRST_MAKEFILE)
-	$(NOECHO) $(PERLRUN) -l -e 'print '\''Warning: Makefile possibly out of date with $(VERSION_FROM)'\''' \
-	-e '    if -e '\''$(VERSION_FROM)'\'' and -M '\''$(VERSION_FROM)'\'' < -M '\''$(FIRST_MAKEFILE)'\'';'
+	$(NOECHO) $(ABSPERLRUN) -l -e "print 'Warning: Makefile possibly out of date with $(VERSION_FROM)'\
+    if -e '$(VERSION_FROM)' and -M '$(VERSION_FROM)' < -M '$(FIRST_MAKEFILE)';"
 
 tardist : $(DISTVNAME).tar$(SUFFIX)
 	$(NOECHO) $(NOOP)
@@ -520,7 +521,7 @@ shdist : distdir
 
 
 # --- MakeMaker distdir section:
-distdir : metafile metafile_addtomanifest
+distdir : metafile metafile_addtomanifest signature
 	$(RM_RF) $(DISTVNAME)
 	$(PERLRUN) "-MExtUtils::Manifest=manicopy,maniread" \
 		-e "manicopy(maniread(),'$(DISTVNAME)', '$(DIST_CP)');"
@@ -566,8 +567,8 @@ doc__install : doc_site_install
 
 pure_perl_install ::
 	$(NOECHO) $(MOD_INSTALL) \
-		read $(PERL_ARCHLIB)/auto/$(FULLEXT)/.packlist \
-		write $(DESTINSTALLARCHLIB)/auto/$(FULLEXT)/.packlist \
+		read $(PERL_ARCHLIB)\auto\$(FULLEXT)\.packlist \
+		write $(DESTINSTALLARCHLIB)\auto\$(FULLEXT)\.packlist \
 		$(INST_LIB) $(DESTINSTALLPRIVLIB) \
 		$(INST_ARCHLIB) $(DESTINSTALLARCHLIB) \
 		$(INST_BIN) $(DESTINSTALLBIN) \
@@ -575,13 +576,13 @@ pure_perl_install ::
 		$(INST_MAN1DIR) $(DESTINSTALLMAN1DIR) \
 		$(INST_MAN3DIR) $(DESTINSTALLMAN3DIR)
 	$(NOECHO) $(WARN_IF_OLD_PACKLIST) \
-		$(SITEARCHEXP)/auto/$(FULLEXT)
+		$(SITEARCHEXP)\auto\$(FULLEXT)
 
 
 pure_site_install ::
 	$(NOECHO) $(MOD_INSTALL) \
-		read $(SITEARCHEXP)/auto/$(FULLEXT)/.packlist \
-		write $(DESTINSTALLSITEARCH)/auto/$(FULLEXT)/.packlist \
+		read $(SITEARCHEXP)\auto\$(FULLEXT)\.packlist \
+		write $(DESTINSTALLSITEARCH)\auto\$(FULLEXT)\.packlist \
 		$(INST_LIB) $(DESTINSTALLSITELIB) \
 		$(INST_ARCHLIB) $(DESTINSTALLSITEARCH) \
 		$(INST_BIN) $(DESTINSTALLSITEBIN) \
@@ -589,12 +590,12 @@ pure_site_install ::
 		$(INST_MAN1DIR) $(DESTINSTALLSITEMAN1DIR) \
 		$(INST_MAN3DIR) $(DESTINSTALLSITEMAN3DIR)
 	$(NOECHO) $(WARN_IF_OLD_PACKLIST) \
-		$(PERL_ARCHLIB)/auto/$(FULLEXT)
+		$(PERL_ARCHLIB)\auto\$(FULLEXT)
 
 pure_vendor_install ::
 	$(NOECHO) $(MOD_INSTALL) \
-		read $(VENDORARCHEXP)/auto/$(FULLEXT)/.packlist \
-		write $(DESTINSTALLVENDORARCH)/auto/$(FULLEXT)/.packlist \
+		read $(VENDORARCHEXP)\auto\$(FULLEXT)\.packlist \
+		write $(DESTINSTALLVENDORARCH)\auto\$(FULLEXT)\.packlist \
 		$(INST_LIB) $(DESTINSTALLVENDORLIB) \
 		$(INST_ARCHLIB) $(DESTINSTALLVENDORARCH) \
 		$(INST_BIN) $(DESTINSTALLVENDORBIN) \
@@ -611,7 +612,7 @@ doc_perl_install ::
 		LINKTYPE "$(LINKTYPE)" \
 		VERSION "$(VERSION)" \
 		EXE_FILES "$(EXE_FILES)" \
-		>> $(DESTINSTALLARCHLIB)/perllocal.pod
+		>> $(DESTINSTALLARCHLIB)\perllocal.pod
 
 doc_site_install ::
 	$(NOECHO) $(ECHO) Appending installation info to $(DESTINSTALLARCHLIB)/perllocal.pod
@@ -622,7 +623,7 @@ doc_site_install ::
 		LINKTYPE "$(LINKTYPE)" \
 		VERSION "$(VERSION)" \
 		EXE_FILES "$(EXE_FILES)" \
-		>> $(DESTINSTALLARCHLIB)/perllocal.pod
+		>> $(DESTINSTALLARCHLIB)\perllocal.pod
 
 doc_vendor_install ::
 	$(NOECHO) $(ECHO) Appending installation info to $(DESTINSTALLARCHLIB)/perllocal.pod
@@ -633,19 +634,19 @@ doc_vendor_install ::
 		LINKTYPE "$(LINKTYPE)" \
 		VERSION "$(VERSION)" \
 		EXE_FILES "$(EXE_FILES)" \
-		>> $(DESTINSTALLARCHLIB)/perllocal.pod
+		>> $(DESTINSTALLARCHLIB)\perllocal.pod
 
 
 uninstall :: uninstall_from_$(INSTALLDIRS)dirs
 
 uninstall_from_perldirs ::
-	$(NOECHO) $(UNINSTALL) $(PERL_ARCHLIB)/auto/$(FULLEXT)/.packlist
+	$(NOECHO) $(UNINSTALL) $(PERL_ARCHLIB)\auto\$(FULLEXT)\.packlist
 
 uninstall_from_sitedirs ::
-	$(NOECHO) $(UNINSTALL) $(SITEARCHEXP)/auto/$(FULLEXT)/.packlist
+	$(NOECHO) $(UNINSTALL) $(SITEARCHEXP)\auto\$(FULLEXT)\.packlist
 
 uninstall_from_vendordirs ::
-	$(NOECHO) $(UNINSTALL) $(VENDORARCHEXP)/auto/$(FULLEXT)/.packlist
+	$(NOECHO) $(UNINSTALL) $(VENDORARCHEXP)\auto\$(FULLEXT)\.packlist
 
 
 # --- MakeMaker force section:
@@ -664,8 +665,8 @@ FORCE:
 $(FIRST_MAKEFILE) : Makefile.PL $(CONFIGDEP)
 	$(NOECHO) $(ECHO) "Makefile out-of-date with respect to $?"
 	$(NOECHO) $(ECHO) "Cleaning current config before rebuilding Makefile..."
-	$(NOECHO) $(RM_F) $(MAKEFILE_OLD)
-	$(NOECHO) $(MV)   $(FIRST_MAKEFILE) $(MAKEFILE_OLD)
+	-$(NOECHO) $(RM_F) $(MAKEFILE_OLD)
+	-$(NOECHO) $(MV)   $(FIRST_MAKEFILE) $(MAKEFILE_OLD)
 	-$(MAKE) -f $(MAKEFILE_OLD) clean $(DEV_NULL) || $(NOOP)
 	$(PERLRUN) Makefile.PL 
 	$(NOECHO) $(ECHO) "==> Your Makefile has been rebuilt. <=="
@@ -678,7 +679,7 @@ $(FIRST_MAKEFILE) : Makefile.PL $(CONFIGDEP)
 
 # --- MakeMaker makeaperl section ---
 MAP_TARGET    = perl
-FULLPERL      = /opt/perl/bin/perl5.8.4
+FULLPERL      = C:\perl\5.8.5\bin\perl.exe
 
 $(MAP_TARGET) :: static $(MAKE_APERL_FILE)
 	$(MAKE) -f $(MAKE_APERL_FILE) $@
@@ -696,7 +697,7 @@ $(MAKE_APERL_FILE) : $(FIRST_MAKEFILE)
 TEST_VERBOSE=0
 TEST_TYPE=test_$(LINKTYPE)
 TEST_FILE = test.pl
-TEST_FILES = t/*.t
+TEST_FILES = t\01-find_device.t t\01-use.t t\02-chunked.t t\03-libpcap_dump.t t\04-other_port.t t\05-capture_to_file.t t\99-manifest.t t\99-pod.t t\99-todo.t t\99-unix-text.t t\99-versions.t
 TESTDB_SW = -d
 
 testdb :: testdb_$(LINKTYPE)
@@ -704,10 +705,10 @@ testdb :: testdb_$(LINKTYPE)
 test :: $(TEST_TYPE)
 
 test_dynamic :: pure_all
-	PERL_DL_NONLAZY=1 $(FULLPERLRUN) "-MExtUtils::Command::MM" "-e" "test_harness($(TEST_VERBOSE), '$(INST_LIB)', '$(INST_ARCHLIB)')" $(TEST_FILES)
+	$(FULLPERLRUN) "-MExtUtils::Command::MM" "-e" "test_harness($(TEST_VERBOSE), '$(INST_LIB)', '$(INST_ARCHLIB)')" $(TEST_FILES)
 
 testdb_dynamic :: pure_all
-	PERL_DL_NONLAZY=1 $(FULLPERLRUN) $(TESTDB_SW) "-I$(INST_LIB)" "-I$(INST_ARCHLIB)" $(TEST_FILE)
+	$(FULLPERLRUN) $(TESTDB_SW) "-I$(INST_LIB)" "-I$(INST_ARCHLIB)" $(TEST_FILE)
 
 test_ : test_dynamic
 
@@ -718,30 +719,36 @@ testdb_static :: testdb_dynamic
 # --- MakeMaker ppd section:
 # Creates a PPD (Perl Package Description) for a binary distribution.
 ppd:
-	$(NOECHO) $(ECHO) '<SOFTPKG NAME="$(DISTNAME)" VERSION="0,04,0,0">' > $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '    <TITLE>$(DISTNAME)</TITLE>' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '    <ABSTRACT>multi-connection sniffer driver</ABSTRACT>' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '    <AUTHOR>Max Maischein &lt;corion@cpan.org&gt;</AUTHOR>' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '    <IMPLEMENTATION>' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <DEPENDENCY NAME="Class-Accessor" VERSION="0,0,0,0" />' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <DEPENDENCY NAME="Class-Data-Inheritable" VERSION="0,0,0,0" />' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <DEPENDENCY NAME="HTTP-Request" VERSION="0,0,0,0" />' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <DEPENDENCY NAME="Net-Pcap" VERSION="0,04,0,0" />' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <DEPENDENCY NAME="NetPacket-TCP" VERSION="0,0,0,0" />' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <OS NAME="$(OSNAME)" />' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="i686-linux-thread-multi" />' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <CODEBASE HREF="" />' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '    </IMPLEMENTATION>' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '</SOFTPKG>' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) "<SOFTPKG NAME=\"$(DISTNAME)\" VERSION=\"0,12,0,0\">" > $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) "    <TITLE>$(DISTNAME)</TITLE>" >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) "    <ABSTRACT>multi-connection sniffer driver</ABSTRACT>" >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) "    <AUTHOR>Max Maischein &lt;corion@cpan.org&gt;</AUTHOR>" >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) "    <IMPLEMENTATION>" >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) "        <DEPENDENCY NAME=\"Class-Accessor\" VERSION=\"0,0,0,0\" />" >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) "        <DEPENDENCY NAME=\"Class-Data-Inheritable\" VERSION=\"0,0,0,0\" />" >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) "        <DEPENDENCY NAME=\"HTTP-Request\" VERSION=\"0,0,0,0\" />" >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) "        <DEPENDENCY NAME=\"LWP-Simple\" VERSION=\"0,0,0,0\" />" >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) "        <DEPENDENCY NAME=\"Net-Pcap\" VERSION=\"0,09,0,0\" />" >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) "        <DEPENDENCY NAME=\"NetPacket-TCP\" VERSION=\"0,0,0,0\" />" >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) "        <OS NAME=\"$(OSNAME)\" />" >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) "        <ARCHITECTURE NAME=\"MSWin32-x86-multi-thread\" />" >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) "        <CODEBASE HREF=\"\" />" >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) "    </IMPLEMENTATION>" >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) "</SOFTPKG>" >> $(DISTNAME).ppd
 
 
 # --- MakeMaker pm_to_blib section:
 
-pm_to_blib: $(TO_INST_PM)
-	$(NOECHO) $(PERLRUN) -MExtUtils::Install -e 'pm_to_blib({@ARGV}, '\''$(INST_LIB)/auto'\'', '\''$(PM_FILTER)'\'')'\
-	  lib/Sniffer/HTTP.pm blib/lib/Sniffer/HTTP.pm \
-	  lib/Sniffer/Connection/HTTP.pm blib/lib/Sniffer/Connection/HTTP.pm \
-	  lib/Sniffer/Connection.pm blib/lib/Sniffer/Connection.pm 
+# For backwards compat with anything that referenced this target.
+pm_to_blib: pm_to_blib.ts
+	$(NOOP)
+
+pm_to_blib.ts: $(TO_INST_PM)
+	$(NOECHO) $(ABSPERLRUN) -MExtUtils::Install -e "pm_to_blib({@ARGV}, '$(INST_LIB)\auto', '$(PM_FILTER)')" \
+	  lib/Sniffer/HTTP.pm blib\lib\Sniffer\HTTP.pm \
+	  lib/Sniffer/Connection/HTTP.pm blib\lib\Sniffer\Connection\HTTP.pm \
+	  lib/Sniffer/Connection.pm blib\lib\Sniffer\Connection.pm \
+	  lib/Net/Pcap/FindDevice.pm blib\lib\Net\Pcap\FindDevice.pm 
 	$(NOECHO) $(TOUCH) $@
 
 # --- MakeMaker selfdocument section:
