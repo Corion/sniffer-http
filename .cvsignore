@@ -5,4 +5,4 @@ Makefile
 *.tar.gz
 pm_to_blib
 .lwpcookies
-Table-Denormalized-*
+Sniffer-HTTP-*
