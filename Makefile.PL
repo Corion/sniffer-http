@@ -14,6 +14,10 @@ You need to install a higher version of
 libpcap, and possibly recompile Net::Pcap
 so it picks up the new, and necessary features.
 
+If you're using Debian, the magic incantation is
+
+  apt-get install libpcap0.8-dev
+
 I give up. Sorry.
 VERSION_TOO_LOW
         exit 1;

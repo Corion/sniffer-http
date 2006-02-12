@@ -89,6 +89,7 @@ sub handle_packet {
   if ($self->flow eq '-:-') {
     $self->init_from_packet($tcp);
   };
+  # warn $tcp;
 
   my $key = $self->flow;
   my @dir = ('src', 'dest');

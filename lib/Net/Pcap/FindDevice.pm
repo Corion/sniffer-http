@@ -39,9 +39,6 @@ stringified parameter exists, it is returned.
 If there exists no matching device for the scalar,
 C<undef> is returned.
 
-If the parameter is not given or a false value, and there
-is a device named C<any>, that one is returned.
-
 If there is only one network device, the name of
 that device is returned.
 
@@ -57,33 +54,36 @@ Otherwise it gives up and returns C<undef>.
 =cut
 
 sub find_device {
-  my ($self, $device_name) = @_;
+  my ($device_name) = @_;
   # Set up Net::Pcap
   my @devs = Net::Pcap::findalldevs(\my %devinfo,\my $err);
   if (! @devs) {
-    croak "Net::Pcap doesn't find any device: $err";
+    croak <<NO_DEVICE
+Net::Pcap didn't find any device: ($err).
+This may be because your version of libpcap
+is too low.";
+NO_DEVICE
   };
 
   my $device = $device_name;
   if ($device_name) {
-    warn "Looking at device name";
     if (ref $device_name eq 'Regexp') {
       ($device) = grep {$_ =~ /$device_name/ || $_ =~ $devinfo{$_}} keys %devinfo;
     } elsif (exists $devinfo{$device_name}) {
       $device = $device_name;
     } elsif  ( $device_name =~ m!^\d+\.\d+\.\d+\.\d+$! ) {
-      warn "Looks like an IP";
       ($device) = interfaces_from_ip( $device_name );
     } else {
       croak "Don't know how to handle $device_name as a Net::Pcap device";
     };
   } else {
     use Data::Dumper;
-    warn Dumper \%devinfo;
-    warn Dumper \@devs;
-    if (exists $devinfo{any}) {
-      $device = 'any';
-    } elsif (@devs == 1) {
+    # 'any' is disabled as it returns information in a format
+    # I don't understand
+    #if (exists $devinfo{any}) {
+    #  $device = 'any';
+    #} elsif
+    if (@devs == 1) {
       $device = $devs[0];
     } else {
       # Now we need to actually look at the devices and select the
@@ -97,20 +97,18 @@ sub find_device {
                   : qr/^(?:0.0.0.0|default)\s+(\S+)\s+.*?(\S+)\s*$/;
       for (qx{netstat -rn}) {
         if ( /$re_if/ ) {
-          #$gateway = $1;
           $device_ip = $2;
           last;
         };
       };
-      warn "Trying $device_ip";
 
       #if (! $device_ip) {
       #  croak "Couldn't find IP address/interface of the default gateway interface. Maybe 'netstat' is unavailable?";
       #};
 
-      for (keys %devinfo) {
-        warn $_;
-      };
+      #for (keys %devinfo) {
+      #  warn $_;
+      #};
       if (exists $devinfo{$device_ip}) {
         return $device_ip
       };
