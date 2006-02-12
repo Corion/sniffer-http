@@ -7,6 +7,9 @@ Sniffer::HTTP
     - implement multiple outstanding requests/responses for one connection
     - find out why it doesn't listen on just port 80
 
+v0.13 (20060212):
+      - added missing dependency on Exporter::Lite (reported by J. Jore)
+
 v0.12 (20051112):
       - live-http-headers.pl now also outputs the status message
         of the response.
