@@ -5,7 +5,7 @@ use Carp qw(croak);
 use Exporter::Lite;
 
 use vars qw($VERSION @EXPORT);
-$VERSION = '0.12';
+$VERSION = '0.13';
 @EXPORT = qw(find_device);
 
 =head1 NAME
@@ -59,9 +59,10 @@ Otherwise it gives up and returns C<undef>.
 sub find_device {
   my ($self, $device_name) = @_;
   # Set up Net::Pcap
-  #my ($err);
-  #my %devinfo;
   my @devs = Net::Pcap::findalldevs(\my %devinfo,\my $err);
+  if (! @devs) {
+    croak "Net::Pcap doesn't find any device: $err";
+  };
 
   my $device = $device_name;
   if ($device_name) {
@@ -77,6 +78,9 @@ sub find_device {
       croak "Don't know how to handle $device_name as a Net::Pcap device";
     };
   } else {
+    use Data::Dumper;
+    warn Dumper \%devinfo;
+    warn Dumper \@devs;
     if (exists $devinfo{any}) {
       $device = 'any';
     } elsif (@devs == 1) {
@@ -98,11 +102,15 @@ sub find_device {
           last;
         };
       };
+      warn "Trying $device_ip";
 
       #if (! $device_ip) {
       #  croak "Couldn't find IP address/interface of the default gateway interface. Maybe 'netstat' is unavailable?";
       #};
 
+      for (keys %devinfo) {
+        warn $_;
+      };
       if (exists $devinfo{$device_ip}) {
         return $device_ip
       };

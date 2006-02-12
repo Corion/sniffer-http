@@ -1,6 +1,25 @@
 use ExtUtils::MakeMaker;
 # See lib/ExtUtils/MakeMaker.pm for details of how to influence
 # the contents of the Makefile that is written.
+
+eval {
+    require Net::Pcap;
+};
+if (! $@) {
+    if (&Net::Pcap::lib_version() eq 'libpcap version unknown (pre 0.8)') {
+        warn <<VERSION_TOO_LOW;
+Your version of libpcap is too low.
+
+You need to install a higher version of
+libpcap, and possibly recompile Net::Pcap
+so it picks up the new, and necessary features.
+
+I give up. Sorry.
+VERSION_TOO_LOW
+        exit 1;
+    };
+};
+
 WriteMakefile(
     'NAME'    => 'Sniffer::HTTP',
     'VERSION_FROM'  => 'lib/Sniffer/HTTP.pm', # finds $VERSION
