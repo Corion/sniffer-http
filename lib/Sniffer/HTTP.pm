@@ -89,7 +89,7 @@ except that you will likely do more work than this example.
 
 =cut
 
-__PACKAGE__->mk_accessors(qw(connections callbacks timeout pcap_device stale_connection));
+__PACKAGE__->mk_accessors(qw(connections callbacks timeout pcap_device stale_connection snaplen));
 
 sub new {
   my ($class,%args) = @_;
@@ -102,6 +102,7 @@ sub new {
     $conn->log->("$key is stale.");
     $s->remove_connection($key);
   };
+  $args{ snaplen } ||= 16384;
 
   $args{timeout} = 300
     unless exists $args{timeout};
@@ -328,10 +329,31 @@ the device via C<find_device> from L<Net::Pcap::FindDevice>.
 
 The C<%OPTIONS> can be the following options:
 
-  capture_file - filename to which the whole capture stream is
-                 written, in L<Net::Pcap> format. This is mostly
-                 useful for remote debugging of a problematic
-                 sequence of connections.
+=over 4
+
+=item *
+
+C<capture_file> - filename to which the whole capture stream is
+written, in L<Net::Pcap> format.
+
+This is mostly
+useful for remote debugging of a problematic
+sequence of connections.
+
+=item *
+
+C<snaplen> - size of the L<Net::Pcap> capture buffer
+
+The size of this buffer can determine whether you lose packets
+while processing. A large value led to lost packets in at least one case.
+The default value is 16384.
+
+=item
+
+C<timeout> - the read timeout in ms while waiting for packets. The default is
+500 ms.
+
+=back
 
 =cut
 
@@ -340,6 +362,8 @@ sub run {
 
   my $device = find_device($device_name);
   $pcap_filter ||= "tcp port 80";
+  $options{ snaplen } ||= $self->snaplen;
+  $options{ timeout } ||= 500;
 
   my $err;
   my ($address, $netmask);
@@ -349,7 +373,7 @@ sub run {
   warn $err if $err;
 
   #   Create packet capture object on device
-  my $pcap = Net::Pcap::open_live($device, 128000, -1, 500, \$err);
+  my $pcap = Net::Pcap::open_live($device, $options{ snaplen }, -1, $options{ timeout }, \$err);
   unless (defined $pcap) {
     die "Unable to create packet capture on device '$device' - $err";
   };
