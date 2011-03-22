@@ -413,14 +413,14 @@ sub run {
   my $save;
   if ($options{capture_file}) {
     $save = Net::Pcap::dump_open($pcap,$options{capture_file});
-    END {
-      # Emergency cleanup
-      if ($save) {
-        Net::Pcap::dump_flush($save);
-        Net::Pcap::dump_close($save);
-        undef $save;
-      }
-    };
+    #END {
+    #  # Emergency cleanup
+    #  if ($save) {
+    #    Net::Pcap::dump_flush($save);
+    #    Net::Pcap::dump_close($save);
+    #    undef $save;
+    #  }
+    #};
   };
 
   Net::Pcap::loop($pcap, -1, sub {
