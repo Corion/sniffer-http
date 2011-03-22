@@ -16,13 +16,16 @@ if (&Net::Pcap::lib_version() eq 'libpcap version unknown (pre 0.8)') {
 if ($^O ne "MSWin32" and $> != 0) {
     diag "You're not running the tests as root - they might fail";
 };
+
 my $name;
 my $ok = eval { $name = find_device(); 1 };
-
 {
     my $err = $@;
     if (not $ok) {
-        BAIL_OUT "find_device error: $err";
+        SKIP: {
+            skip "Did not find any capture device", 10;
+        };
+        exit
     };
 };
 
