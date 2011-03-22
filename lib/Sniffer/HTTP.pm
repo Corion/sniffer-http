@@ -73,10 +73,30 @@ script that comes with the distribution.
 Creates a new object for handling many HTTP requests.
 You can pass in the following arguments:
 
-  connections      - preexisting connections (optional)
-  callbacks        - callbacks for the new connections (hash reference)
-  timeout          - timeout in seconds after which a connection is considered stale
-  stale_connection - callback for stale connections
+=over 4
+
+=item *
+
+C<connections>     - preexisting connections (optional)
+
+=item *
+
+C<callbacks>        - callbacks for the new connections (hash reference)
+
+=item *
+
+C<timeout>          - timeout in seconds after which a connection is considered stale
+
+=item *
+
+C<stale_connection> - callback for stale connections
+
+=item *
+
+C<snaplen> - maximum size of data to capture per packet. The default is 16384,
+which should be plenty for all cases.
+
+=back
 
 Usually, you will want to create a new object like this:
 
@@ -453,7 +473,6 @@ sub run_file {
   ) && die 'Unable to compile packet capture filter';
   Net::Pcap::setfilter($pcap,$filter);
 
-  #Net::Pcap::loop($pcap, -1, sub { $self->handle_eth_packet($_[2]) }, '');
   Net::Pcap::loop($pcap, -1, sub { $self->handle_eth_packet($_[2], $_[1]->{tv_sec}) }, '')
 };
 
@@ -529,13 +548,13 @@ Max Maischein (corion@cpan.org)
 
 =head1 COPYRIGHT
 
-Copyright (C) 2005 Max Maischein.  All Rights Reserved.
+Copyright (C) 2005-2011 Max Maischein.  All Rights Reserved.
 
 This code is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
 
 =head1 SEE ALSO
 
-L<HTTP::Proxy>, ethereal, L<Sniffer::Connnection>
+L<HTTP::Proxy>, L<http://wireshark.org|Wireshark>, L<Sniffer::Connnection>
 
 =cut
