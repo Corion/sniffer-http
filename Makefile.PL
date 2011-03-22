@@ -30,7 +30,6 @@ WriteMakefile(
     'PREREQ_PM'    => { 'Class::Accessor' => 0,
                         'Class::Data::Inheritable' => 0,
                         'HTTP::Request'   => 0,
-                        'File::Slurp'     => 0, # for the tests
                         'LWP::Simple'     => 0, # for one test. Should be bundled with HTTP::Request anyway
                         'NetPacket::TCP'  => 0,
                         'Net::Pcap'       => 0.09,

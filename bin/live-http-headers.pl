@@ -22,12 +22,12 @@ defaults to C<any> on Linux and dies on Windows.
 
 my $VERBOSE = 0;
 
-my $device = find_device(qr/$ARGV[0]/);
+my $device = $ARGV[0];
 
 
-#if ($^O =~ /MSWin32|cygwin/ && $device) {
-# $device = qr/$device/i
-#};
+if ($^O =~ /MSWin32|cygwin/ && $device) {
+ $device = qr/$device/i
+};
 
 my $sniffer = Sniffer::HTTP->new(
   callbacks => {
