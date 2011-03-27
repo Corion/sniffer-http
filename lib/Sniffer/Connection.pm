@@ -120,7 +120,6 @@ sub handle_packet {
 
 sub flush_window {
   my ($self,$part,$ack) = @_;
-  my $status = $self->status;
 
   my $window = $self->window->{$part};
   my @seqnums = grep { $_ <= $ack } (sort keys %$window);
@@ -132,6 +131,7 @@ sub flush_window {
 
   my @packets = map { delete $window->{$_} } @seqnums;
   for my $tcp (@packets) {
+    my $status = $self->status;
     die "Didn't find a window for every seqnum ..."
       unless $tcp;
 
@@ -142,10 +142,10 @@ sub flush_window {
           $self->init_from_packet($tcp);
           $self->log->("New connection initiated");
           $self->status("SYN");
-          return;
+          next;
         } else {
           $self->log->("Not a SYN packet (ignored)");
-          return;
+          next
         };
 
     } elsif ($status eq 'SYN') {
@@ -156,12 +156,12 @@ sub flush_window {
             print "!!! Connection status is $status, expected SYN\n";
           };
           $self->status("SYN_ACK");
-          return
+          next
         } else {
           # silently drop the packet for now
           # If we are in SYN state but didn't get a SYN ACK, emit a warning
+          next
           # $self->log->("!!! Connection status is SYN, ignoring packet");
-          return;
         };
     } elsif ($status eq 'ACK' or $status eq 'SYN_ACK') {
         my $data = $tcp->{data};
@@ -178,7 +178,8 @@ sub flush_window {
       } elsif ($status eq 'CLOSE') {
         $self->log->("Connection close acknowledged");
         $self->teardown->($self);
-        return
+        #return
+        next
       };
 
       if ($tcp->{flags} & FIN) {
