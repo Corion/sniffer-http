@@ -15,6 +15,7 @@ sub collect_request {
 };
 
 use Sniffer::HTTP;
+use Net::Pcap::FindDevice;
 
 if ($^O ne "MSWin32" and $> != 0) {
     diag "You're not running the tests as root - they might fail";

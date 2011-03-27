@@ -9,6 +9,7 @@ use Net::Pcap::FindDevice;
 use LWP::Simple;
 
 use Sniffer::HTTP;
+use Net::Pcap::FindDevice;
 if ($^O ne "MSWin32" and $> != 0) {
     diag "We are not root. find_device() might be unreliable and tests might fail.";
 };
