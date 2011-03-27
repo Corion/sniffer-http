@@ -12,7 +12,7 @@ use Carp qw(croak);
 
 use vars qw($VERSION);
 
-$VERSION = '0.20';
+$VERSION = '0.21';
 
 =head1 NAME
 
@@ -535,6 +535,19 @@ Note that Net::Pcap resolves the IP addresses before using them, so you might
 actually get more data than you asked for.
 
 =head1 BUGS
+
+=head2 Closing Connections Properly
+
+Currently, it is not well-detected when a connection is closed by the
+starting side and no C<FIN ACK> packet is received from the remote side. This
+can even happen is you close the browser window instead of waiting
+for the connections to auto-close.
+
+I'm not sure how to fix this besides employing better guesswork
+and "closing" connections as soon as the C<FIN> packet gets sent.
+
+
+=head2 Small Testsuite
 
 The whole module suite has almost no tests.
 
