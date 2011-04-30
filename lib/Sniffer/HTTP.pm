@@ -336,7 +336,7 @@ sub handle_tcp_packet {
   $conn;
 };
 
-=head2 C<< run DEVICE, PCAP_FILTER, %OPTIONS >>
+=head2 C<< run DEVICE_NAME, PCAP_FILTER, %OPTIONS >>
 
 Listens on the given device for all TCP
 traffic from and to port 80 and invokes the callbacks
@@ -344,7 +344,7 @@ as necessary. If you want finer control
 over what C<Net::Pcap> does, you need to set up
 Net::Pcap yourself.
 
-The C<DEVICE> parameter is used to determine
+The C<DEVICE_NAME> parameter is used to determine
 the device via C<find_device> from L<Net::Pcap::FindDevice>.
 
 The C<%OPTIONS> can be the following options:
@@ -359,6 +359,22 @@ written, in L<Net::Pcap> format.
 This is mostly
 useful for remote debugging of a problematic
 sequence of connections.
+
+=item *
+
+C<device> - a preconfigured Net::Pcap device.
+
+This skips the detection of the device by name. If you have special
+configuration options, configure the device to your needs in your
+code and then pass it in.
+
+=item *
+
+C<netmask> - the netmask to capture on.
+
+If you want to skip netmask detection, for example because your
+capture device has no IP address, you can pass in the netmask
+through this option.
 
 =item *
 
@@ -380,17 +396,21 @@ C<timeout> - the read timeout in ms while waiting for packets. The default is
 sub run {
   my ($self,$device_name,$pcap_filter,%options) = @_;
 
-  my $device = find_device($device_name);
+  $options{ device } ||= find_device($device_name);
   $pcap_filter ||= "tcp port 80";
   $options{ snaplen } ||= $self->snaplen;
   $options{ timeout } ||= 500;
 
-  my $err;
-  my ($address, $netmask);
-  if (Net::Pcap::lookupnet($device, \$address, \$netmask, \$err)) {
-    die 'Unable to look up device information for ', $device, ' - ', $err;
-  }
-  warn $err if $err;
+  my ($err);
+  if (! $options{ netmask }) {
+    # detect the netmask unless we have a user-specified netmask
+    my ($netmask, $address);
+    if (Net::Pcap::lookupnet($device, \$address, \$netmask, \$err)) {
+      die 'Unable to look up device information for ', $device, ' - ', $err;
+    }
+    warn $err if $err;
+    $options{ netmask } = $netmask; 
+  };
 
   #   Create packet capture object on device
   my $pcap = Net::Pcap::open_live($device, $options{ snaplen }, -1, $options{ timeout }, \$err);
@@ -406,7 +426,7 @@ sub run {
     \$filter,
     $pcap_filter,
     0,
-    $netmask
+    $options{ netmask },
   ) && die 'Unable to compile packet capture filter';
   Net::Pcap::setfilter($pcap,$filter);
 
