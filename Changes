@@ -7,6 +7,12 @@ Sniffer::HTTP
     - implement multiple outstanding requests/responses for one connection
     - find out why it doesn't listen on just port 80
 
+v0.22 (20110430):
+      - More configurability of ->run(), suggested by Keith Schincke
+      - C<device> can now be a preconfigured Net::Pcap device
+      - C<netmask> can now be specified, in case you have a capture interface
+        without an IP address
+
 v0.21 (20110327):
       - Fix loop behaviour in Sniffer::HTTP::flush_window to process more
         than one packet
