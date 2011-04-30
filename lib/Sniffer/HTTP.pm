@@ -397,6 +397,13 @@ sub run {
   my ($self,$device_name,$pcap_filter,%options) = @_;
 
   $options{ device } ||= find_device($device_name);
+  
+  # Set a name so the error messages look good
+  $device_name = '<user specified device>'
+      if exists $options{ device };
+  $device_name = '<unknown device>'
+      unless defined $device_name;
+  
   $pcap_filter ||= "tcp port 80";
   $options{ snaplen } ||= $self->snaplen;
   $options{ timeout } ||= 500;
@@ -405,17 +412,17 @@ sub run {
   if (! $options{ netmask }) {
     # detect the netmask unless we have a user-specified netmask
     my ($netmask, $address);
-    if (Net::Pcap::lookupnet($device, \$address, \$netmask, \$err)) {
-      die 'Unable to look up device information for ', $device, ' - ', $err;
+    if (Net::Pcap::lookupnet($options{ device }, \$address, \$netmask, \$err)) {
+      die "Unable to look up device information for '$device_name': $err";
     }
     warn $err if $err;
     $options{ netmask } = $netmask; 
   };
 
   #   Create packet capture object on device
-  my $pcap = Net::Pcap::open_live($device, $options{ snaplen }, -1, $options{ timeout }, \$err);
+  my $pcap = Net::Pcap::open_live($options{ device }, $options{ snaplen }, -1, $options{ timeout }, \$err);
   unless (defined $pcap) {
-    die "Unable to create packet capture on device '$device' - $err";
+    die "Unable to create packet capture on device '$device_name': $err";
   };
 
   $self->pcap_device($pcap);
