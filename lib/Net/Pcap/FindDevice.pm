@@ -93,14 +93,16 @@ NO_DEVICE
       # one with the default gateway:
 
       # First, get the default gateway by using
-      # `netstat -rn`
+      # `netstat -rn` and looking for the interface tied to the gateway
       my $device_ip;
       my $re_if = $^O eq 'MSWin32'
-                  ? qr/^\s*(?:0.0.0.0)\s+(\S+)\s+(\S+)\s+/
+                  #         route        mask    gateway interface
+                  ? qr/^\s*(?:0.0.0.0)\s+(?:\S+)\s+(\S+)\s+(\S+)/
                   : qr/^(?:0.0.0.0|default)\s+(\S+)\s+.*?(\S+)\s*$/;
       for (qx{netstat -rn}) {
         if ( /$re_if/ ) {
           $device_ip = $2;
+          warn "Found $2 in $_";
           last;
         };
       };
