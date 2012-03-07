@@ -2,7 +2,7 @@ package Net::Pcap::FindDevice;
 use strict;
 use Net::Pcap; # just for the convenience function below
 use Carp qw(croak);
-use Exporter::Lite;
+use Exporter 'import';
 
 use vars qw($VERSION @EXPORT);
 $VERSION = '0.22';
@@ -80,7 +80,9 @@ NO_DEVICE
       croak "Don't know how to handle $device_name as a Net::Pcap device";
     };
   } else {
-    use Data::Dumper;
+    # TODO: Remove Data::Dumper dependency
+    #use Data::Dumper;
+    #warn Dumper \%devinfo;
     # 'any' is disabled as it returns information in a format
     # I don't understand
     #if (exists $devinfo{any}) {
@@ -102,7 +104,7 @@ NO_DEVICE
       for (qx{netstat -rn}) {
         if ( /$re_if/ ) {
           $device_ip = $2;
-          warn "Found $2 in $_";
+          #warn "Found $2 in $_";
           last;
         };
       };
