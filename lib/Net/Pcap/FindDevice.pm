@@ -8,6 +8,8 @@ use vars qw($VERSION @EXPORT);
 $VERSION = '0.22';
 @EXPORT = qw(find_device);
 
+# TODO: Add diagnosis function to tell the user what the "best" function is
+
 =head1 NAME
 
 Net::Pcap::FindDevice - find the "best" network device for sniffing
