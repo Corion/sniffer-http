@@ -5,7 +5,7 @@ use Carp qw(croak);
 use Exporter 'import';
 
 use vars qw($VERSION @EXPORT);
-$VERSION = '0.22';
+$VERSION = '0.23';
 @EXPORT = qw(find_device);
 
 # TODO: Add diagnosis function to tell the user what the "best" function is
