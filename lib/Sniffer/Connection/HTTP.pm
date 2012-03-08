@@ -133,7 +133,7 @@ sub flush_received {
     my $len = $self->_response_len;
     my $chunksize = $self->_response_chunk_size;
 
-    my $te = lc $res->header('Transfer-Encoding');
+    my $te = lc ($res->header('Transfer-Encoding') || '');
     if ($te and $te eq 'chunked') {
       if (! defined $chunksize) {
         $chunksize = $self->extract_chunksize($buffer);
