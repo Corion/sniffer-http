@@ -119,8 +119,7 @@ my $response2 = bless( {
                                          }, 'HTTP::Headers' ),
                     '_msg' => "Not Found\r",
                  }, 'HTTP::Response' );
-delete $response1->{_headers}->{'::std_case'};
-delete $response2->{_headers}->{'::std_case'};
+delete $_->{_headers}->{'::std_case'} for @requests;
 is_deeply(\@requests, [$request1,$request2], "Got the expected requests");
 
 #my $c1 = $response2->content;
@@ -131,6 +130,7 @@ is_deeply(\@requests, [$request1,$request2], "Got the expected requests");
 #diag "Expected :$c1";
 #diag "     Got :$e1";
 
+delete $_->[0]->{_headers}->{'::std_case'} for @responses;
 is_deeply(\@responses, [[$response1,$request1],[$response2,$request2]], "Got the expected responses")
   or diag Dumper \$responses[1];
 

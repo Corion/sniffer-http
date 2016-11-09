@@ -199,11 +199,11 @@ the <a href="mailto:%5bno%20address%20given%5d">webmaster</a>.
                    }, 'HTTP::Response' );
 $response2->{_content} =~ s!\r\n!\n!mg;
 
+delete $_->{_headers}->{'::std_case'} for @requests;
 is_deeply(\@requests, [$request1,$request2], "Got the expected requests")
   or diag Dumper \@requests;
 
-delete $response1->{_headers}->{'::std_case'};
-delete $response2->{_headers}->{'::std_case'};
+delete $_->[0]->{_headers}->{'::std_case'} for @responses;
 is_deeply(\@responses, [[$response1,$request1],[$response2,$request2]], "Got the expected responses")
   or diag Dumper \@responses;
 
