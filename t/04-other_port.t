@@ -202,6 +202,8 @@ $response2->{_content} =~ s!\r\n!\n!mg;
 is_deeply(\@requests, [$request1,$request2], "Got the expected requests")
   or diag Dumper \@requests;
 
+delete $response1->{_headers}->{'::std_case'};
+delete $response2->{_headers}->{'::std_case'};
 is_deeply(\@responses, [[$response1,$request1],[$response2,$request2]], "Got the expected responses")
   or diag Dumper \@responses;
 

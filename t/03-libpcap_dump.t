@@ -119,6 +119,8 @@ my $response2 = bless( {
                                          }, 'HTTP::Headers' ),
                     '_msg' => "Not Found\r",
                  }, 'HTTP::Response' );
+delete $response1->{_headers}->{'::std_case'};
+delete $response2->{_headers}->{'::std_case'};
 is_deeply(\@requests, [$request1,$request2], "Got the expected requests");
 
 #my $c1 = $response2->content;
