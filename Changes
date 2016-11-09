@@ -7,6 +7,10 @@ Sniffer::HTTP
     - implement multiple outstanding requests/responses for one connection
     - find out why it doesn't listen on just port 80
 
+v0.24 (20161109):
+      - Fix RT 107349, reported by Slaven Rezic
+	  - Still not moved to Net::Inspect
+
 v0.23 (20120308):
       - Make IP address detection work on other networks as well
       - Remove reliance on Exporter::Lite in favour of a recent Exporter.pm

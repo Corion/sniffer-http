@@ -37,12 +37,11 @@
             "Exporter" : "5.5",
             "HTTP::Request" : "0",
             "LWP::Simple" : "0",
-            "Net::Inspect" : "0",
             "Net::Pcap" : "0.09",
             "NetPacket::TCP" : "0"
          }
       }
    },
    "release_status" : "stable",
-   "version" : "0.23"
+   "version" : "0.24"
 }
