@@ -2,7 +2,7 @@
 ^.lwpcookies
 ^.releaserc
 ^blib/
-^Sniffer-Connection-.*
+^Sniffer-HTTP-.*
 CVS/
 ^pm_to_blib
 .tar.gz$
@@ -16,3 +16,4 @@ t/06-gmail_interaction.t
 t/gmail_http_sniffer.pcap
 ^.git/
 .*.bak$
+^MYMETA
