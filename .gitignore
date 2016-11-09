@@ -6,7 +6,6 @@ blib/
 .releaserc
 Sniffer-HTTP-*
 *.bak
-META.yml
 pm_to_blib.ts
 *.old
 *.bak
@@ -14,6 +13,5 @@ pm_to_blib.ts
 *.tar
 .lwpcookies
 .releaserc
-META.yml
 blibdirs.ts
 MYMETA.*
