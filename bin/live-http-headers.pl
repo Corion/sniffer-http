@@ -31,8 +31,8 @@ if ($^O =~ /MSWin32|cygwin/ && $device) {
 
 my $sniffer = Sniffer::HTTP->new(
   callbacks => {
-      request  => sub { my ($req,$conn) = @_; print ">>>\n", $req->as_string },
-      response => sub { my ($res,$req,$conn) = @_; print "<<<\n", $res->status_line,"\n",$res->headers->as_string },
+      request  => sub { my ($req,$conn) = @_; print ">>".">\n", $req->as_string },
+      response => sub { my ($res,$req,$conn) = @_; print "<<"."<\n", $res->status_line,"\n",$res->headers->as_string },
       log      => sub { print $_[0] if $VERBOSE },
       tcp_log  => sub { print $_[0] if $VERBOSE > 1 },
   }
