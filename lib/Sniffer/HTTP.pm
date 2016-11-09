@@ -1,11 +1,10 @@
 package Sniffer::HTTP;
 use strict;
-use Sniffer::Connection::HTTP;
 use base 'Class::Accessor';
-use Data::Dumper;
-use NetPacket::Ethernet;
-use NetPacket::IP;
-use NetPacket::TCP;
+use Net::Inspect::L2::Pcap;
+use Net::Inspect::L3::IP;
+use Net::Inspect::L4::TCP;
+use Net::Inspect::L7::HTTP;
 use Net::Pcap; # just for the convenience function below
 use Net::Pcap::FindDevice;
 use Carp qw(croak);
@@ -44,20 +43,20 @@ Sniffer::HTTP - multi-connection sniffer driver
 
   while (1) {
 
-    # retrieve ethernet packet into $eth,
+    # retrieve IP packet into $ip,
     # for example via Net::Pcap
-    my $eth = sniff_ethernet_packet;
+    my $ip = sniff_ip_packet;
 
     # And handle the packet. Callbacks will be invoked as soon
     # as complete data is available
-    $sniffer->handle_eth_packet($eth);
+    $sniffer->handle_ip_packet($ip);
   };
 
 This driver gives you callbacks with the completely accumulated
 L<HTTP::Request>s or L<HTTP::Response>s as sniffed from the
 TCP traffic. You need to feed it the Ethernet, IP or TCP packets
 either from a dump file or from L<Net::Pcap> by unpacking them via
-L<NetPacket>.
+L<Net::Inspect>.
 
 As the whole response data is accumulated in memory you should
 be aware of memory issues. If you want to write stuff
@@ -101,48 +100,64 @@ which should be plenty for all cases.
 Usually, you will want to create a new object like this:
 
   my $sniffer = Sniffer::HTTP->new( callbacks => {
-    request  => sub { my ($req, $conn) = @_; print $req->uri,"\n"; },
-    response => sub { my ($res,$req,$conn) = @_; print $res->code,"\n"; },
+      request  => sub { my ($req, $conn) = @_; print $req->uri,"\n"; },
+      response => sub { my ($res,$req,$conn) = @_; print $res->code,"\n"; },
   });
 
 except that you will likely do more work than this example.
 
 =cut
 
-__PACKAGE__->mk_accessors(qw(connections callbacks timeout pcap_device stale_connection snaplen));
+__PACKAGE__->mk_accessors(qw(
+    connections
+    callbacks
+    timeout
+    pcap_device
+    layers
+    stale_connection
+    snaplen
+));
 
 sub new {
-  my ($class,%args) = @_;
+    my ($class,%args) = @_;
 
-  $args{connections} ||= {};
-  $args{callbacks}   ||= {};
-  $args{callbacks}->{log}   ||= sub {};
-  $args{stale_connection} ||= sub {
-    my ($s,$conn,$key) = @_;
-    $conn->log->("$key is stale.");
-    $s->remove_connection($key);
-  };
-  $args{ snaplen } ||= 16384;
+    $args{connections} ||= {};
+    $args{callbacks}   ||= {};
+    $args{callbacks}->{log}   ||= sub {};
+  
+    # Set up the layers
+    $args{ layers } ||= {};
 
-  $args{timeout} = 300
-    unless exists $args{timeout};
+    $args{ layers }->{ l7 } ||= Net::Inspect::L7::HTTP->new;
+    $args{ layers }->{ l4 } ||= Net::Inspect::L4::TCP->new( $args{ layers}->{ l7 });
+    $args{ layers }->{ l3 } ||= Net::Inspect::L3::IP->new( $args{ layers}->{ l4 });
 
-  my $self = $class->SUPER::new(\%args);
-
-  my $user_closed = delete $args{callbacks}->{closed};
-  $args{callbacks}->{closed} = sub {
-    my $key = $_[0]->flow;
-    if (! exists $args{connections}->{$key}) {
-      warn "Error: flow() ne connection-key!";
-      $key = join ":", reverse split /:/, $key;
+    $args{stale_connection} ||= sub {
+        my ($s,$conn,$key) = @_;
+        $conn->log->("$key is stale.");
+        $s->remove_connection($key);
     };
-    $_[0]->{log}->("Removing $key");
-    $self->remove_connection($key);
-    goto &$user_closed
-      if $user_closed;
-  };
+    $args{ snaplen } ||= 16384;
 
-  $self;
+    $args{timeout} = 300
+        unless exists $args{timeout};
+
+    my $self = $class->SUPER::new(\%args);
+
+    my $user_closed = delete $args{callbacks}->{closed};
+    $args{callbacks}->{closed} = sub {
+        my $key = $_[0]->flow;
+        if (! exists $args{connections}->{$key}) {
+            warn "Error: flow() ne connection-key!";
+            $key = join ":", reverse split /:/, $key;
+        };
+        $_[0]->{log}->("Removing $key");
+        $self->remove_connection($key);
+        goto &$user_closed
+            if $user_closed;
+    };
+
+    $self;
 };
 
 =head2 C<< $sniffer->remove_connection KEY >>
@@ -156,6 +171,7 @@ for it is received.
 =cut
 
 sub remove_connection {
+  return;
   my ($self,$key) = @_;
   if (ref $key) {
     my $real_key = $key->flow;
@@ -176,6 +192,7 @@ to keep track of the packet order and resent packets.
 =cut
 
 sub find_or_create_connection {
+  return;
   my ($self,$tcp) = @_;
 
   my $connections = $self->connections;
@@ -255,54 +272,26 @@ sub live_connections {
   grep { $_->last_activity >= $cutoff } values %$connections;
 };
 
-=head2 C<< $sniffer->handle_eth_packet ETH [, TIMESTAMP] >>
+=head2 C<< $sniffer->handle_ip_packet( $ip [, $timestamp] ) >>
 
-Processes a raw ethernet packet. L<Net::PCap> will return
-this kind of packet for most Ethernet network cards.
+Processes an IP packet. L<Net::Pcap> will return raw ethernet
+packets for most Ethernet network cards, so you will need to unpack
+it yourself.
 
 You need to call this method (or one of the other protocol
-methods) for every packet you wish to handle.
+methods) for every packet you wish to handle unless you
+use one .
 
-The optional TIMESTAMP corresponds to the epoch time
-the packet was captured at. It defaults to the value
-of C<time()>.
-
-=cut
-
-sub handle_eth_packet {
-  my ($self,$eth,$ts) = @_;
-  $ts ||= time();
-  #warn Dumper( NetPacket::Ethernet->decode($eth) );
-  $self->handle_ip_packet(NetPacket::Ethernet->decode($eth)->{data}, $ts);
-};
-
-=head2 C<< $sniffer->handle_ip_packet IP [, TIMESTAMP] >>
-
-Processes a raw ip packet.
-
-The optional TIMESTAMP corresponds to the epoch time
+The optional C<$timestamp> corresponds to the epoch time
 the packet was captured at. It defaults to the value
 of C<time()>.
 
 =cut
 
 sub handle_ip_packet {
-  my ($self,$ip,$ts) = @_;
+  my ($self,$eth,$ts) = @_;
   $ts ||= time();
-  #warn Dumper( NetPacket::IP->decode($ip) );
-  # This is a workaround around a bug in NetPacket::IP v0.04, which sets the
-  # payload to include the trailer
-  my $i = NetPacket::IP->decode($ip);
-
-  # Safeguard against malformed IP headers
-  $i->{hlen} = 5
-      if $i->{hlen} < 5;
-  my $conn = $self->handle_tcp_packet(substr($i->{data}, 0, $i->{len}-($i->{hlen}*4)), $ts);
-  unless($conn->tcp_connection->dest_host) {
-    $conn->tcp_connection->dest_host($i->{dest_ip});
-    $conn->tcp_connection->src_host($i->{src_ip});
-  }
-  $conn;
+  $self->layers->{l3}->pktin($eth,$ts);
 };
 
 =head2 C<< $sniffer->handle_tcp_packet TCP [, TIMESTAMP] >>
@@ -323,17 +312,18 @@ of C<time()>.
 sub handle_tcp_packet {
   my ($self,$tcp,$ts) = @_;
   $ts ||= time();
-  if (! ref $tcp) {
-    $tcp = NetPacket::TCP->decode($tcp);
-  };
+  #if (! ref $tcp) {
+  #  $tcp = NetPacket::TCP->decode($tcp);
+  #};
   #warn $tcp->{src_port}.":".$tcp->{dest_port};;
-  my $conn = $self->find_or_create_connection($tcp);
-  $conn->handle_packet($tcp,$ts);
+  $self->layers->{l4}->pktin($tcp,\my %info);
+  #my $conn = $self->find_or_create_connection($tcp);
+  #$conn->handle_packet($tcp,$ts);
   # Handle callbacks for detection of stale connections
-  $self->stale_connections();
+  #$self->stale_connections();
 
   # Return the connection that the packet belongs to
-  $conn;
+  #$conn;
 };
 
 =head2 C<< run DEVICE_NAME, PCAP_FILTER, %OPTIONS >>
@@ -426,6 +416,7 @@ sub run {
   };
 
   $self->pcap_device($pcap);
+  $self->layers->{ l2 } = Net::Inspect::L2::Pcap->new( $pcap, $self->layers->{ l3 });
 
   my $filter;
   Net::Pcap::compile(
@@ -443,21 +434,14 @@ sub run {
     if(! $save) {
       warn "Could not save to $options{capture_file}";
     };
-    #END {
-    #  # Emergency cleanup
-    #  if ($save) {
-    #    Net::Pcap::dump_flush($save);
-    #    Net::Pcap::dump_close($save);
-    #    undef $save;
-    #  }
-    #};
   };
 
   Net::Pcap::loop($pcap, -1, sub {
     if ($save) {
       Net::Pcap::dump($save, @_[1,2]);
     };
-    $self->handle_eth_packet($_[2], $_[1]->{tv_sec});
+    my (undef,$hdr,$data) = @_;
+    return $self->layers->{ l2 }->pktin($data,$hdr);
   }, '')
     || die 'Unable to perform packet capture';
 
@@ -492,6 +476,7 @@ sub run_file {
     croak "Unable to create packet capture from filename '$filename': $err";
   };
   $self->pcap_device($pcap);
+  $self->layers->{ l2 } = Net::Inspect::L2::Pcap->new( $pcap, $self->layers->{ l3 });
 
   my $filter;
   Net::Pcap::compile(
@@ -503,7 +488,12 @@ sub run_file {
   ) && die 'Unable to compile packet capture filter';
   Net::Pcap::setfilter($pcap,$filter);
 
-  Net::Pcap::loop($pcap, -1, sub { $self->handle_eth_packet($_[2], $_[1]->{tv_sec}) }, '')
+  Net::Pcap::loop($pcap, -1,
+      sub { 
+        my (undef,$hdr,$data) = @_;
+        return $self->layers->{ l2 }->pktin($data,$hdr);
+        #$self->handle_eth_packet($_[2], $_[1]->{tv_sec})
+      }, '')
 };
 
 1;

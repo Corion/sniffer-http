@@ -3,8 +3,6 @@ use strict;
 use Test::More tests => 4;
 use Data::Dumper;
 
-use NetPacket::TCP;
-
 my (@responses,@requests);
 sub collect_response {
   my ($res,$req,$conn) = @_;
@@ -25,7 +23,7 @@ if ($^O ne "MSWin32" and $> != 0) {
 };
 
 my $name;
-my $ok = eval { $name = find_device(); 1 };
+my $ok = 1; #eval { $name = find_device(); 1 };
 {
     my $err = $@;
     if (not $ok) {
@@ -55,11 +53,10 @@ for (@packets) {
   binmode $fh;
   my $data = do { local $/; <$fh> };
 
-  my $tcp = NetPacket::TCP->decode( $data );
   #diag $tcp->{data};
   #diag sprintf "%s:%s\t%s\t%s\t%s\t(%s)\n", @{$tcp}{qw(src_port dest_port seqnum acknum)}, $tcp->{seqnum} + length($tcp->{data}), length ($tcp->{data});
 
-  $s->handle_tcp_packet($tcp);
+  $s->handle_tcp_packet($data);
 };
 
 my $request = bless( {

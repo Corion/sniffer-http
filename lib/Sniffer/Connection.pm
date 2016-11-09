@@ -2,7 +2,6 @@ package Sniffer::Connection;
 use strict;
 use base 'Class::Accessor';
 use Carp qw(carp croak);
-use NetPacket::TCP;
 use Data::Dumper;
 
 =head1 NAME

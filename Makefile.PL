@@ -31,8 +31,8 @@ WriteMakefile(
                         'Class::Data::Inheritable' => 0,
                         'HTTP::Request'   => 0,
                         'LWP::Simple'     => 0, # for one test.
-                        'NetPacket::TCP'  => 0,
                         'Net::Pcap'       => '0.09',
+						'Net::Inspect'    => 0,
 			'Exporter'         => '5.5',
                       }, # e.g., Module::Name => 1.1
     ($] >= 5.005 ?    ## Add these new keywords supported since 5.005
