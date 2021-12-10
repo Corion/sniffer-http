@@ -23,6 +23,11 @@ my $s = Sniffer::HTTP->new(
   #stale_connection => sub { $stale_count++ },
 );
 
+*Sniffer::HTTP::stale_connections = sub {
+    # For old captures, we won't time out any connection
+    # This is not ideal, but better than not processing any data
+};
+
 for my $fn (@ARGV) {
     $s->run_file($fn,"tcp port 80");
 };
