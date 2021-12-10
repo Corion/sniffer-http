@@ -32,6 +32,8 @@ WriteMakefile(
                         'Class::Data::Inheritable' => 0,
                         'HTTP::Request'   => 0,
                         'LWP::Simple'     => 0, # for one test.
+                        'HTTP::Request'   => '6.14', # Newline trimming
+                        'HTTP::Response'  => '6.14', # Newline trimming
                         'NetPacket::TCP'  => 0,
                         'Net::Pcap'       => '0.09',
                         'parent'          => 0,
