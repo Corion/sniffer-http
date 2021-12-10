@@ -395,13 +395,13 @@ sub run {
   my ($self,$device_name,$pcap_filter,%options) = @_;
 
   $options{ device } ||= find_device($device_name);
-  
+
   # Set a name so the error messages look good
   $device_name = '<user specified device>'
       if exists $options{ device };
   $device_name = '<unknown device>'
       unless defined $device_name;
-  
+
   $pcap_filter ||= "tcp port 80";
   $options{ snaplen } ||= $self->snaplen;
   $options{ timeout } ||= 500;
@@ -414,7 +414,7 @@ sub run {
       die "Unable to look up device information for '$device_name': $err";
     }
     warn $err if $err;
-    $options{ netmask } = $netmask; 
+    $options{ netmask } = $netmask;
   };
 
   #   Create packet capture object on device
