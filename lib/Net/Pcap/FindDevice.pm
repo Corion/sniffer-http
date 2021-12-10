@@ -4,9 +4,8 @@ use Net::Pcap; # just for the convenience function below
 use Carp qw(croak);
 use Exporter 'import';
 
-use vars qw($VERSION @EXPORT);
-$VERSION = '0.24';
-@EXPORT = qw(find_device);
+our $VERSION = '0.24';
+our @EXPORT = qw(find_device);
 
 # TODO: Add diagnosis function to tell the user what the "best" function is
 

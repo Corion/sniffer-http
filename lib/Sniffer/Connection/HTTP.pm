@@ -27,11 +27,9 @@ which encapsulates most of this.
 
 =cut
 
-use base 'Class::Accessor';
+use parent 'Class::Accessor';
 
-use vars qw($VERSION);
-
-$VERSION = '0.24';
+our $VERSION = '0.24';
 
 my @callbacks = qw(request response closed log);
 __PACKAGE__->mk_accessors(qw(tcp_connection sent_buffer recv_buffer _response _response_chunk_size _response_len _request prev_request),

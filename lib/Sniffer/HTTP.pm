@@ -10,9 +10,7 @@ use Net::Pcap; # just for the convenience function below
 use Net::Pcap::FindDevice;
 use Carp qw(croak);
 
-use vars qw($VERSION);
-
-$VERSION = '0.24';
+our $VERSION = '0.24';
 
 =head1 NAME
 
